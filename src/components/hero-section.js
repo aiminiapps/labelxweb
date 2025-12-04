@@ -1,253 +1,226 @@
 'use client';
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from 'motion/react';
-import { FaTelegramPlane, FaArrowRight, FaCheckCircle, FaRobot } from 'react-icons/fa';
-import { BsStars, BsLightningChargeFill } from 'react-icons/bs';
+import React, { useRef, useState } from 'react';
+import { motion, useSpring, useMotionValue, useTransform, useScroll } from 'framer-motion';
+import { FaTelegramPlane, FaArrowRight } from 'react-icons/fa';
+import { BsStars } from 'react-icons/bs';
 
-// --- internal component: Magnetic Button ---
-const MagneticButton = ({ children, className = "", onClick, variant = "primary" }) => {
+// --- 1. Your Custom Magnetic Wrapper ---
+const MagneticWrapper = ({ children, strength = 0.5 }) => {
   const ref = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-  const handleMouse = (e) => {
+  const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.2, y: middleY * 0.2 });
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    x.set((clientX - centerX) * strength);
+    y.set((clientY - centerY) * strength);
   };
 
-  const reset = () => setPosition({ x: 0, y: 0 });
-  const { x, y } = position;
-
-  // Variant styles
-  const baseStyles = "relative z-10 flex items-center justify-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300";
-  const variants = {
-    primary: "bg-[#FFD60A] text-[#000000] hover:shadow-[0_0_40px_rgba(255,214,10,0.4)]",
-    glass: "bg-white/5 border border-white/10 text-white backdrop-blur-md hover:bg-white/10 hover:border-white/20"
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
   };
+
+  const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
 
   return (
-    <motion.button
+    <motion.div
       ref={ref}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+      className="inline-block" // Ensure it wraps content tightly
     >
       {children}
-    </motion.button>
+    </motion.div>
   );
 };
 
-// --- Main Hero Component ---
+// --- 2. Main Hero Component ---
 export default function Hero() {
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-  
-  // Scroll Parallax for the Background (moves slower than foreground)
-  const yBg = useTransform(scrollY, [0, 1000], [0, 300]);
-  const yText = useTransform(scrollY, [0, 500], [0, 100]);
 
-  // Mouse Parallax Logic
+  // Background Parallax Logic (Kept subtle as requested)
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 1000], [0, 200]);
+
+  // Mouse Parallax for Background Light
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 40, damping: 25 });
+  const smoothY = useSpring(mouseY, { stiffness: 40, damping: 25 });
 
-  function handleMouseMove({ currentTarget, clientX, clientY }) {
-    let { left, top, width, height } = currentTarget.getBoundingClientRect();
-    let x = (clientX - left) / width - 0.5;
-    let y = (clientY - top) / height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
+  function handleMouseMove({ clientX, clientY }) {
+    if (typeof window !== 'undefined') {
+      const x = (clientX / window.innerWidth) - 0.5;
+      const y = (clientY / window.innerHeight) - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    }
   }
 
   return (
-    <section 
+    <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full min-h-[110vh] bg-[#000000] overflow-hidden flex flex-col justify-center items-center font-sans"
+      className="relative w-full min-h-screen bg-[#000000] flex items-center font-sans selection:bg-[#FFD60A] selection:text-black"
     >
-      
-      {/* 1. Dynamic Background & Glows */}
-      <motion.div style={{ y: yBg }} className="absolute inset-0 pointer-events-none">
-        {/* Top Right Yellow/Orange Glow */}
-        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#FFD60A]/10 rounded-full blur-[120px]" />
-        {/* Bottom Left Purple/Blue Glow */}
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#5856D6]/20 rounded-full blur-[100px]" />
-        {/* Grid Texture Overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,black,transparent)]" />
-      </motion.div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <motion.div style={{ y: yBg }} className="absolute inset-0 pointer-events-none z-0">
+        {/* Massive Dynamic Light Source */}
+        <TiltLayer mouseX={smoothX} mouseY={smoothY} depth={-5}>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[900px] bg-[conic-gradient(from_0deg_at_50%_50%,#FFD60A_0deg,#5856D6_120deg,#FFD60A_240deg)] opacity-15 blur-[160px] rounded-[100%]" />
+        </TiltLayer>
         
-        {/* 2. Left Column: Text & CTA */}
-        <motion.div style={{ y: yText }} className="space-y-8 max-w-2xl">
+        {/* Grain & Grid Texture */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04]" />
+      </motion.div>
+      <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full pt-20">
+        
+        {/* --- LEFT SIDE: Copy & Actions --- */}
+        <div className="space-y-10 max-w-4xl">
           
           {/* Badge */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_0_20px_rgba(255,214,10,0.1)]"
           >
-            <span className="w-2 h-2 rounded-full bg-[#FFD60A] animate-pulse" />
-            <span className="text-xs uppercase tracking-widest text-white/80 font-medium">Live on Telegram</span>
+            <BsStars className="text-[#FFD60A] text-xs" />
+            <span className="text-[11px] uppercase tracking-[0.2em] text-white/80 font-semibold">
+              The AI Consensus Layer
+            </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* New Creative Title */}
           <div className="relative">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.2, 1, 0.2, 1] }}
-              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1]"
+              className="text-5xl heading md:text-7xl font-bold tracking-tight text-white leading-[1.1]"
             >
-              Label Data. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD60A] to-[#FF9500]">
-                Earn Crypto.
-              </span>
+              Refining Intelligence.
+            </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 1, 0.2, 1] }}
+              className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FFD60A] via-[#FF9500] to-[#FFD60A] leading-[1.1] pb-2"
+            >
+              Rewarding Humanity.
             </motion.h1>
           </div>
 
-          {/* Description */}
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg md:text-xl text-neutral-400 max-w-lg leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-lg text-neutral-400 max-w-lg leading-relaxed font-light"
           >
-            Transform your spare time into tokenized rewards. Complete micro-missions, validate AI data, and climb the leaderboard—all within Telegram.
+            Join the decentralized workforce training the next generation of AI models. Verify data, earn points, and claim $LBLX.
           </motion.p>
 
-          {/* Buttons */}
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-             className="flex flex-col sm:flex-row gap-4 pt-4"
+          {/* Magnetic Buttons (Using your custom wrapper) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-wrap gap-6 pt-2 items-center"
           >
-            <MagneticButton variant="primary">
-              <FaTelegramPlane className="text-xl" />
-              <span>Launch App</span>
-            </MagneticButton>
-            <MagneticButton variant="glass">
-              <span>View Missions</span>
-              <FaArrowRight />
-            </MagneticButton>
+            {/* Primary Button */}
+            <MagneticWrapper strength={0.6}>
+              <button className="relative group px-8 py-4 rounded-full bg-[#FFD60A] text-black font-bold text-sm uppercase tracking-wider overflow-hidden transition-all hover:shadow-[0_0_40px_rgba(255,214,10,0.5)]">
+                <span className="relative z-10 flex items-center gap-2">
+                  <FaTelegramPlane className="text-lg" />
+                  Launch Agent
+                </span>
+                {/* Shine Effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent z-0" />
+              </button>
+            </MagneticWrapper>
+
+            {/* Secondary Button */}
+            <MagneticWrapper strength={0.3}>
+              <button className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-sm uppercase tracking-wider backdrop-blur-md hover:bg-white/10 transition-colors flex items-center gap-2 group">
+                How it works
+                <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform duration-300 text-[#FFD60A]" />
+              </button>
+            </MagneticWrapper>
           </motion.div>
 
-          {/* Social Proof / Stats */}
-          <motion.div 
+          {/* Real Social Proof (Avatars) */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="flex items-center gap-6 pt-8 border-t border-white/5"
+            transition={{ delay: 0.6 }}
+            className="flex items-center gap-5 pt-8 border-t border-white/10"
           >
-            <div>
-              <h4 className="text-2xl font-bold text-white">50k+</h4>
-              <p className="text-sm text-neutral-500">Active Labelers</p>
+            {/* Real Avatar Stack */}
+            <div className="flex -space-x-4">
+              {[
+                'https://i.pravatar.cc/150?img=33',
+                'https://i.pravatar.cc/150?img=47',
+                'https://i.pravatar.cc/150?img=12',
+                'https://i.pravatar.cc/150?img=68'
+              ].map((src, i) => (
+                <div 
+                    key={i} 
+                    className="relative w-12 h-12 rounded-full border-[3px] border-black overflow-hidden ring-1 ring-white/20"
+                >
+                    <img src={src} alt="User" className="w-full h-full object-cover" />
+                </div>
+              ))}
+              <div className="w-12 h-12 rounded-full border-[3px] border-black bg-neutral-800 flex items-center justify-center text-xs font-bold text-white ring-1 ring-white/20">
+                +4k
+              </div>
             </div>
-            <div className="w-px h-10 bg-white/10" />
-            <div>
-              <h4 className="text-2xl font-bold text-white">1.2M</h4>
-              <p className="text-sm text-neutral-500">Missions Done</p>
+
+            <div className="flex flex-col">
+               <div className="flex items-center gap-1">
+                 <span className="text-xl font-bold text-white">52,891</span>
+                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+               </div>
+               <p className="text-sm text-neutral-500 font-medium">Active Labelers Online</p>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* 3. Right Column: The "Glass" Interface Visual */}
-        <div className="relative h-[600px] w-full hidden lg:flex items-center justify-center perspective-[2000px]">
-          
-          {/* Floating Card 1 (Main Interface) */}
-          <Card3D mouseX={mouseX} mouseY={mouseY} depth={20} className="relative z-20 w-[380px] bg-neutral-900/80 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl p-6 overflow-hidden">
-             {/* Decor */}
-             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFD60A] to-[#FF9500]" />
+        {/* --- RIGHT SIDE: Empty Container for Your Component --- */}
+        <div className="hidden lg:flex justify-center items-center h-full min-h-[600px] w-full relative">
+            {/* PLACEHOLDER AREA 
+                You can drop your component right here. 
+                The layout is flex-centered.
+            */}
              
-             {/* Header */}
-             <div className="flex justify-between items-center mb-8">
-               <div className="flex items-center gap-3">
-                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                    <BsStars className="text-[#FFD60A]" />
-                 </div>
-                 <div>
-                   <h3 className="text-white font-bold text-sm">Text Classification</h3>
-                   <p className="text-xs text-neutral-400">Mission #4092</p>
-                 </div>
-               </div>
-               <span className="text-[#FFD60A] text-xs font-mono border border-[#FFD60A]/20 px-2 py-1 rounded">+50 PTS</span>
+             {/* Optional: A visual guide (remove this when you add your component) */}
+             <div className="border border-dashed border-white/10 rounded-3xl w-full h-full max-h-[600px] flex items-center justify-center bg-white/2">
+                <span className="text-white/20 font-mono text-sm animate-pulse">
+                    {'< YourComponent />'}
+                </span>
              </div>
-
-             {/* Content Mock */}
-             <div className="space-y-3 mb-8">
-                <div className="h-2 w-1/3 bg-white/10 rounded-full" />
-                <div className="h-24 w-full bg-black/40 rounded-xl border border-white/5 p-4 text-neutral-400 text-sm leading-relaxed">
-                   "Analyze the sentiment of this crypto market update: 'Bitcoin consolidates as volume spikes...'"
-                </div>
-             </div>
-
-             {/* Action Buttons Mock */}
-             <div className="grid grid-cols-2 gap-3">
-               <div className="h-10 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center text-green-400 text-sm font-medium">Positive</div>
-               <div className="h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 text-sm font-medium">Negative</div>
-             </div>
-          </Card3D>
-
-          {/* Floating Card 2 (Rewards - Behind) */}
-          <Card3D mouseX={mouseX} mouseY={mouseY} depth={10} className="absolute top-20 right-10 z-10 w-[280px] bg-[#1a1a1a]/90 border border-white/10 rounded-3xl backdrop-blur-md p-5 shadow-2xl grayscale opacity-60">
-             <div className="flex items-center justify-between mb-4">
-                <h4 className="text-white text-sm font-bold">Reward Pool</h4>
-                <BsLightningChargeFill className="text-white" />
-             </div>
-             <div className="h-20 bg-black/50 rounded-xl mb-3" />
-             <div className="h-2 w-2/3 bg-white/20 rounded-full" />
-          </Card3D>
-
-          {/* Floating Elements (Orbs/Icons) */}
-          <FloatingIcon mouseX={mouseX} mouseY={mouseY} depth={40} className="absolute top-10 left-10 text-[#FFD60A] text-4xl">
-            <BsStars />
-          </FloatingIcon>
-          <FloatingIcon mouseX={mouseX} mouseY={mouseY} depth={-30} className="absolute bottom-20 right-20 text-[#5856D6] text-3xl opacity-80">
-            <FaRobot />
-          </FloatingIcon>
 
         </div>
+
       </div>
     </section>
   );
 }
 
-// --- Helper: 3D Tilt Card ---
-function Card3D({ children, mouseX, mouseY, depth, className }) {
+// --- Helper: Tilt Layer for Background ---
+const TiltLayer = ({ children, mouseX, mouseY, depth, className = "" }) => {
   const x = useTransform(mouseX, [-0.5, 0.5], [-depth, depth]);
   const y = useTransform(mouseY, [-0.5, 0.5], [-depth, depth]);
   
-  // Subtle rotation based on mouse
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [5, -5]); 
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-5, 5]);
-
   return (
-    <motion.div style={{ x, y, rotateX, rotateY }} className={className}>
+    <motion.div style={{ x, y }} className={`transform-gpu ${className}`}>
       {children}
     </motion.div>
   );
-}
-
-// --- Helper: Floating Icon ---
-function FloatingIcon({ children, mouseX, mouseY, depth, className }) {
-  const x = useTransform(mouseX, [-0.5, 0.5], [-depth, depth]);
-  const y = useTransform(mouseY, [-0.5, 0.5], [-depth, depth]);
-
-  return (
-    <motion.div 
-      style={{ x, y }} 
-      className={className}
-      animate={{ y: [0, -10, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-    >
-      {children}
-    </motion.div>
-  );
-}
+};
