@@ -1,6 +1,6 @@
 'use client';
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from 'motion/react';
 import { FaTelegramPlane, FaArrowRight, FaCheckCircle, FaRobot } from 'react-icons/fa';
 import { BsStars, BsLightningChargeFill } from 'react-icons/bs';
 
