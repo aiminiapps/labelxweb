@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useSpring, useMotionValue, useTransform, useScroll } from 'framer-motion';
 import { FaTelegramPlane, FaArrowRight } from 'react-icons/fa';
 import { BsStars } from 'react-icons/bs';
+import Herocobe from './ui/hero-element';
 
 // --- 1. Your Custom Magnetic Wrapper ---
 const MagneticWrapper = ({ children, strength = 0.5 }) => {
@@ -192,20 +193,8 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* --- RIGHT SIDE: Empty Container for Your Component --- */}
-        <div className="hidden lg:flex justify-center items-center h-full min-h-[600px] w-full relative">
-            {/* PLACEHOLDER AREA 
-                You can drop your component right here. 
-                The layout is flex-centered.
-            */}
-             
-             {/* Optional: A visual guide (remove this when you add your component) */}
-             <div className="border border-dashed border-white/10 rounded-3xl w-full h-full max-h-[600px] flex items-center justify-center bg-white/2">
-                <span className="text-white/20 font-mono text-sm animate-pulse">
-                    {'< YourComponent />'}
-                </span>
-             </div>
-
+        <div className="flex justify-center items-center h-full min-h-[600px] w-full relative">
+            <Herocobe/>
         </div>
 
       </div>
