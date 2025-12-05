@@ -1,47 +1,172 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { 
   motion, 
   useScroll, 
   useTransform, 
   useSpring,
   useMotionTemplate, 
-  useMotionValue 
+  useMotionValue,
+  animate,
+  useInView
 } from 'framer-motion';
 
-// --- Icon Components (Inline SVGs to prevent build errors) ---
+const useLenis = () => {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js";
+    script.async = true;
+    script.onload = () => {
+      const lenis = new window.Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 2,
+      });
 
-const BsArrowRight = ({ className }) => (
-  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className={className} height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-    <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+};
+
+// --- 2. Micro-Interaction Icons (Draw Animations) ---
+
+const drawTransition = {
+  duration: 1.2,
+  ease: "easeInOut"
+};
+
+const AnimatedCheckIcon = ({ className }) => (
+  <motion.svg 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    className={className}
+    whileHover="hover"
+    initial="initial"
+    animate="animate"
+  >
+    <motion.path 
+      d="M20 6L9 17l-5-5" 
+      variants={{
+        initial: { pathLength: 0, opacity: 0 },
+        animate: { pathLength: 1, opacity: 1, transition: drawTransition },
+        hover: { pathLength: [1, 0, 1], transition: { duration: 0.8 } } 
+      }}
+    />
+  </motion.svg>
+);
+
+const AnimatedArrowRight = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+    <motion.path 
+      d="M5 12h14" 
+      initial={{ pathLength: 0 }} 
+      animate={{ pathLength: 1 }} 
+      transition={{ duration: 0.8, delay: 0.2 }} 
+    />
+    <motion.path 
+      d="M12 5l7 7-7 7" 
+      initial={{ pathLength: 0 }} 
+      animate={{ pathLength: 1 }} 
+      transition={{ duration: 0.8, delay: 0.4 }} 
+    />
   </svg>
 );
 
-const BsPlayFill = ({ className }) => (
-  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className={className} height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+const AnimatedPlayIcon = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M5 3l14 9-14 9V3z" />
   </svg>
 );
 
-const BsFileEarmarkText = ({ className }) => (
-  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className={className} height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
-    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-  </svg>
-);
+const AnimatedDocIcon = ({ className }) => {
+  const variants = {
+    hover: { pathLength: 1, opacity: 1 },
+    rest: { pathLength: 1, opacity: 0.7 }
+  };
+  
+  return (
+    <motion.svg 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="1.5" 
+      className={className}
+      whileHover="hover"
+      initial="rest"
+    >
+      <motion.path 
+        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" 
+        variants={{ hover: { pathLength: [1, 0.8, 1] } }} 
+      />
+      <motion.path 
+        d="M14 2v6h6" 
+        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.1 } } }}
+      />
+      <motion.path 
+        d="M16 13H8" 
+        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.2 } } }}
+      />
+      <motion.path 
+        d="M16 17H8" 
+        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.3 } } }}
+      />
+      <motion.path 
+        d="M10 9H8" 
+        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.4 } } }}
+      />
+    </motion.svg>
+  );
+};
 
-const BsStars = ({ className }) => (
-  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className={className} height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"/>
-  </svg>
-);
+// --- 3. Animated Counter Component ---
 
-// --- Utility Components ---
+const Counter = ({ from = 0, to, duration = 2.5, suffix = "" }) => {
+  const nodeRef = useRef();
+  const inView = useInView(nodeRef, { once: true, margin: "-20px" });
+  
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (inView) {
+      const controls = animate(from, to, {
+        duration,
+        ease: [0.16, 1, 0.3, 1], // Custom EaseOut
+        onUpdate(value) {
+          let formatted;
+          // Cleaner number formatting logic
+          if (value % 1 === 0) {
+            formatted = value.toFixed(0);
+          } else {
+            formatted = value.toFixed(1);
+          }
+          formatted = Number(formatted).toLocaleString('en-US');
+          node.textContent = formatted + suffix;
+        }
+      });
+      return () => controls.stop();
+    }
+  }, [from, to, duration, inView, suffix]);
 
-/**
- * A subtle grid background that reveals itself near the mouse cursor
- */
+  return <span ref={nodeRef} className="tabular-nums" />;
+};
+
+// --- 4. Utility Components ---
+
 const SpotlightGrid = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -59,47 +184,51 @@ const SpotlightGrid = () => {
     >
       <div className="absolute inset-0 bg-black" />
       
-      {/* Aurora Gradients - softer and more premium */}
+      {/* Refined Background Mesh 
+        Using the new Orange/Yellow theme 
+        Primary: #FF7A1A, Secondary: #FDD536
+      */}
       <motion.div 
         animate={{ 
-          opacity: [0.4, 0.6, 0.4], 
-          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.3, 0.2], 
+          scale: [1, 1.05, 1],
           rotate: [0, 5, 0]
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-[20%] left-[20%] w-[600px] h-[600px] rounded-full blur-[120px] bg-green-500/20 mix-blend-screen"
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-[20%] left-[10%] w-[800px] h-[800px] rounded-full blur-[130px] bg-[#FF7A1A]/10 mix-blend-screen"
       />
       <motion.div 
         animate={{ 
-          opacity: [0.3, 0.5, 0.3], 
-          scale: [1, 1.2, 1],
-          x: [0, 50, 0]
+          opacity: [0.15, 0.25, 0.15], 
+          scale: [1, 1.1, 1],
+          x: [0, 40, 0]
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-[10%] right-[10%] w-[500px] h-[500px] rounded-full blur-[120px] bg-emerald-500/10 mix-blend-screen"
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute top-[5%] right-[10%] w-[600px] h-[600px] rounded-full blur-[130px] bg-[#FDD536]/10 mix-blend-screen"
       />
 
-      {/* Grid Pattern */}
+      {/* Crisp Grid Pattern */}
       <div 
-        className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+        className="absolute inset-0 bg-[linear-gradient(to_right,#333333_1px,transparent_1px),linear-gradient(to_bottom,#333333_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.15]"
       />
       
-      {/* Mouse Spotlight Effect */}
+      {/* Interactive Mouse Spotlight - Using Primary Orange */}
       <motion.div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              650px circle at ${mouseX}px ${mouseY}px,
-              rgba(16, 185, 129, 0.15),
+              500px circle at ${mouseX}px ${mouseY}px,
+              rgba(255, 122, 26, 0.08),
               transparent 80%
             )
           `,
         }}
       />
       
-      {/* Bottom Fade */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+      {/* Vignette & Bottom Fade */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent h-full w-full pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-transparent h-32 w-full pointer-events-none" />
     </div>
   );
 };
@@ -113,6 +242,7 @@ const MagneticButton = ({ children, className }) => {
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
+    // Reduced magnetism slightly for cleaner feel
     setPosition({ x: middleX * 0.15, y: middleY * 0.15 });
   };
 
@@ -136,57 +266,64 @@ const MagneticButton = ({ children, className }) => {
   );
 };
 
-const LabelXHero = () => {
-  const containerRef = useRef(null);
+// --- 5. Main Hero Component ---
+
+const Hero = () => {
+  // Initialize Lenis within the component
+  useLenis();
   
-  // Parallax Text with Physics-Based Smoothing (Lenis-feel)
+  const containerRef = useRef(null);
   const { scrollY } = useScroll();
   
-  // We use spring physics to dampen the raw scroll value, creating the smooth "fluid" effect
-  // typical of libraries like Lenis, but natively in Framer Motion.
+  // Refined Parallax Physics
+  // Increased damping for "heavier" feel, adjusted transforms to keep elements in view properly
   const smoothScrollY = useSpring(scrollY, {
-    damping: 25, // Higher damping = less oscillation (more "drifty")
-    stiffness: 120, // Lower stiffness = looser connection to scroll
-    mass: 0.5 // Heavy feel
+    damping: 30,    // Smoother stop
+    stiffness: 100, 
+    mass: 0.8       // Heavier feel
   });
 
-  const y1 = useTransform(smoothScrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(smoothScrollY, [0, 500], [0, 150]);
-  const opacityFade = useTransform(smoothScrollY, [0, 300], [1, 0]);
+  const y1 = useTransform(smoothScrollY, [0, 500], [0, 50]); 
+  
+  // Text moves up slightly faster than scroll to create depth
+  const y2 = useTransform(smoothScrollY, [0, 500], [0, -50]); 
+  
+  // Fade out logic remains the same
+  const opacityFade = useTransform(smoothScrollY, [0, 400], [1, 0]);
 
   return (
     <section 
       ref={containerRef}
-      className="relative w-full min-h-[110vh] flex flex-col items-center justify-center overflow-hidden bg-black selection:bg-green-500/30"
+      className="relative w-full min-h-[110vh] flex flex-col items-center justify-center overflow-hidden bg-black selection:bg-[#FF7A1A]/30"
     >
       <SpotlightGrid />
 
-      {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32 flex flex-col items-center text-center">
+      {/* Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32 flex flex-col items-center text-center">
         
-        {/* 1. Animated Badge */}
+        {/* Badge - Updated Colors */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-10"
+          className="mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-[0_0_20px_rgba(34,197,94,0.1)] hover:bg-white/[0.08] hover:border-green-500/30 transition-all duration-300 cursor-pointer group">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-[0_0_20px_rgba(255,122,26,0.15)] hover:bg-white/[0.08] hover:border-[#FF7A1A]/30 transition-all duration-300 cursor-pointer group">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF7A1A] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF7A1A]"></span>
             </span>
-            <span className="text-sm font-medium text-green-300 tracking-wide uppercase">
-              LabelX 2.0 is Live
+            <span className="text-sm font-medium text-[#FF7A1A] tracking-wide uppercase">
+              LabelX 2.0 Live
             </span>
             <span className="w-px h-3 bg-white/20 mx-2" />
             <span className="text-sm text-gray-400 flex items-center gap-1 group-hover:text-white transition-colors">
-              Start Earning <BsArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              Start Earning <AnimatedArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </div>
         </motion.div>
 
-        {/* 2. Hero Headline */}
+        {/* Headline */}
         <motion.div
           style={{ y: y2, opacity: opacityFade }}
           className="relative mb-8"
@@ -195,188 +332,169 @@ const LabelXHero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-bold tracking-tighter text-white leading-[1.1] sm:leading-[1.05]"
+            className="text-5xl heading sm:text-7xl md:text-8xl lg:text-[7rem] font-bold tracking-tighter text-white leading-[1.1] sm:leading-[1.05]"
           >
-            Train AI. <br className="hidden md:block" />
+            Train AI 
+            <br className="hidden md:block" />
             <span className="relative inline-block">
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-300 to-teal-400 animate-gradient-x">
+              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A1A] via-[#FF8533] to-[#FDD536] animate-gradient-x bg-[length:200%_auto]">
                 Get Paid Crypto.
               </span>
-              {/* Glow behind text */}
-              <div className="absolute -inset-8 bg-green-500/20 blur-[60px] -z-10 opacity-40 rounded-full" />
+              {/* Glow Behind Text */}
+              <div className="absolute -inset-8 bg-[#FF7A1A]/20 blur-[90px] -z-10 opacity-30 rounded-full" />
             </span>
           </motion.h1>
         </motion.div>
 
-        {/* 3. Subheading */}
+        {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light tracking-wide"
+          className="text-base text-balance md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light tracking-wide"
         >
           Join the decentralized workforce. Label data for top AI models and receive 
-          <span className="text-white font-medium border-b border-green-500/30 pb-0.5"> instant LBLX payouts</span> directly to your wallet.
+          <span className="text-white font-medium border-b border-[#FF7A1A]/30 pb-0.5 mx-1">instant LBLX payouts</span> 
+          directly to your wallet.
         </motion.p>
 
-        {/* 4. Creative Action Buttons */}
+        {/* Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto z-20"
         >
-          {/* Primary Button - Magnetic + Glow */}
+          {/* Primary Button */}
           <MagneticButton className="w-full sm:w-auto">
-            <a href="/?tab=task2" className="block w-full sm:w-auto">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group relative w-full sm:w-auto px-9 py-4.5 bg-white text-black rounded-2xl font-bold text-base overflow-hidden shadow-[0_0_40px_-10px_rgba(34,197,94,0.4)]"
-              >
-                {/* Internal gradient shine */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-green-300/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative flex items-center justify-center gap-2">
-                  <span className="p-1 bg-black rounded-full text-white group-hover:bg-green-600 transition-colors duration-300">
-                    <BsPlayFill className="w-3.5 h-3.5 fill-current translate-x-0.5" />
-                  </span>
-                  <span>Start Tasking</span>
-                </div>
-                
-                {/* Continuous Shimmer */}
-                <motion.div
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ repeat: Infinity, duration: 3, ease: "linear", repeatDelay: 2 }}
-                  className="absolute inset-0 w-2/3 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-12 opacity-50"
-                />
-              </motion.button>
-            </a>
+            <button className="group relative w-full sm:w-auto px-9 py-4 bg-white text-black rounded-2xl font-bold text-base overflow-hidden shadow-[0_0_40px_-10px_rgba(255,122,26,0.4)]">
+              {/* Internal shine using Primary color */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#FF7A1A]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative flex items-center justify-center gap-2">
+                <span className="p-1 bg-black rounded-full text-white group-hover:bg-[#FF7A1A] transition-colors duration-300">
+                  <AnimatedPlayIcon className="w-3 h-3 translate-x-0.5" />
+                </span>
+                <span>Start Tasking</span>
+              </div>
+              <motion.div
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ repeat: Infinity, duration: 3, ease: "linear", repeatDelay: 2 }}
+                className="absolute inset-0 w-2/3 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-12 opacity-50 pointer-events-none"
+              />
+            </button>
           </MagneticButton>
 
-          {/* Secondary Button - Glassy */}
-          <a href="#docs" className="w-full sm:w-auto">
-            <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.08)" }}
-              whileTap={{ scale: 0.98 }}
-              className="group w-full sm:w-auto px-9 py-4.5 bg-white/[0.02] border border-white/10 text-white rounded-2xl font-medium text-base backdrop-blur-xl transition-all relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-              <div className="flex items-center justify-center gap-2">
-                <BsFileEarmarkText className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-                <span>How it Works</span>
-              </div>
-            </motion.button>
-          </a>
+          {/* Secondary Button */}
+          <button className="group w-full sm:w-auto px-9 py-4 bg-white/[0.02] border border-white/10 text-white rounded-2xl font-medium text-base backdrop-blur-xl transition-all relative overflow-hidden hover:bg-white/[0.05]">
+            <div className="flex items-center justify-center gap-3">
+              <AnimatedDocIcon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+              <span>How it Works</span>
+            </div>
+          </button>
         </motion.div>
 
-        {/* 5. Enhanced Dashboard Stats Section */}
+        {/* Stats Dashboard */}
         <motion.div
-          style={{ y: y1 }} // Smooth physics-based parallax
+          style={{ y: y1 }}
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-24 w-full max-w-5xl px-4"
+          className="mt-28 w-full max-w-5xl px-4"
         >
-          {/* Glass Card Container */}
-          <div className="relative rounded-[32px] border border-white/10 bg-[#0A0A0A]/60 backdrop-blur-2xl p-1 shadow-2xl">
-            {/* Ambient Glows */}
-            <div className="absolute -top-24 left-1/4 w-64 h-64 bg-green-500/10 rounded-full blur-[80px] pointer-events-none" />
-            <div className="absolute -bottom-24 right-1/4 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
+          <div className="relative rounded-[32px] border border-white/10 bg-[#0A0A0A]/80 backdrop-blur-2xl p-1 shadow-2xl overflow-hidden">
+            {/* Ambient Background Glows - Adjusted for Theme */}
+            <div className="absolute -top-32 left-0 w-96 h-96 bg-[#FF7A1A]/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-32 right-0 w-96 h-96 bg-[#FDD536]/10 rounded-full blur-[100px] pointer-events-none" />
             
-            {/* Top Highlight Line */}
-            <div className="absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-            <div className="relative grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-black/20 rounded-[28px] overflow-hidden">
-              {[
-                { 
-                  label: "Community Earnings", 
-                  value: "$2.4M+", 
-                  suffix: "Paid Out",
-                  color: "text-emerald-400"
-                },
-                { 
-                  label: "Data Points Labeled", 
-                  value: "850M+", 
-                  suffix: "Total Volume",
-                  color: "text-blue-400"
-                },
-                { 
-                  label: "Active Labelers", 
-                  value: "12,500+", 
-                  suffix: "Global Workforce",
-                  color: "text-purple-400"
-                }
-              ].map((stat, i) => (
-                <div key={i} className="group relative p-8 flex flex-col items-center justify-center hover:bg-white/[0.02] transition-colors duration-500">
-                  {/* Hover Spotlight inside card */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-b from-white/[0.02] to-transparent transition-opacity duration-500" />
-                  
-                  <div className="relative z-10 flex flex-col items-center">
-                    <motion.div 
-                      initial={{ scale: 0.9 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 mb-2 tracking-tight ${stat.color.replace('text', 'from')}`}
-                    >
-                      {stat.value}
-                    </motion.div>
-                    
-                    <div className="flex items-center gap-2 mt-1">
-                      <BsStars className={`w-3 h-3 ${stat.color} opacity-70`} />
-                      <span className="text-sm font-semibold text-gray-300 uppercase tracking-widest">
-                        {stat.label}
-                      </span>
-                    </div>
-                    
-                    <span className="text-xs text-gray-600 font-medium mt-1 group-hover:text-gray-500 transition-colors">
-                      {stat.suffix}
-                    </span>
-                  </div>
-                </div>
-              ))}
+            <div className="relative grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-black/40 rounded-[28px] overflow-hidden">
+              <StatItem 
+                value={2.4} 
+                suffix="M+" 
+                label="Community Earnings" 
+                sub="Paid Out" 
+                // Primary Gradient
+                color="from-[#FF7A1A]" 
+                iconColor="text-[#FF7A1A]"
+                prefix="$"
+              />
+              <StatItem 
+                value={850} 
+                suffix="M+" 
+                label="Data Points" 
+                sub="Total Volume" 
+                // Secondary Gradient
+                color="from-[#FDD536]" 
+                iconColor="text-[#FDD536]"
+              />
+              <StatItem 
+                value={12.5} 
+                suffix="K+" 
+                label="Active Labelers" 
+                sub="Global Workforce" 
+                // Success/Accent (Keeping subtle or using Primary)
+                // Let's use Primary Darker or a mix
+                color="from-[#FF8533]" 
+                iconColor="text-[#FF8533]"
+              />
             </div>
-            
-            {/* Bottom Highlight Line */}
-            <div className="absolute inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
           </div>
         </motion.div>
 
       </div>
-
-      {/* Decorative Floating Elements */}
+      
+      {/* Floating Particles for Depth */}
       <FloatingParticles />
     </section>
   );
 };
 
-// --- Sub-components for Visual Flair ---
+// --- Helper Components ---
 
-const FloatingParticles = () => {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Particle 1 */}
-      <motion.div
-        animate={{
-          y: [0, -40, 0],
-          opacity: [0.3, 0.6, 0.3],
-          rotate: [0, 45, 0]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 left-[10%] w-32 h-32 rounded-3xl border border-green-500/10 bg-green-500/5 backdrop-blur-[2px] hidden lg:block"
-      />
-      {/* Particle 2 */}
-      <motion.div
-        animate={{
-          y: [0, 60, 0],
-          opacity: [0.2, 0.5, 0.2],
-          rotate: [0, -30, 0]
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-1/3 right-[5%] w-24 h-24 rounded-full border border-emerald-500/10 bg-emerald-500/5 backdrop-blur-[2px] hidden lg:block"
-      />
+const StatItem = ({ value, suffix, label, sub, color, iconColor, prefix = "" }) => (
+  <div className="group relative p-8 flex flex-col items-center justify-center hover:bg-white/[0.02] transition-colors duration-500">
+    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-b from-white/[0.03] to-transparent transition-opacity duration-500 pointer-events-none" />
+    
+    <div className="relative z-10 flex flex-col items-center">
+      <div className={`text-4xl md:text-5xl font-bold text-white/80 mb-2 tracking-tight`}>
+        {prefix}<Counter from={0} to={value} suffix={suffix} />
+      </div>
+      
+      <div className="flex items-center gap-2 mt-1">
+        <AnimatedCheckIcon className={`w-4 h-4 ${iconColor} opacity-80`} />
+        <span className="text-sm font-semibold text-gray-300 uppercase tracking-widest">
+          {label}
+        </span>
+      </div>
+      
+      <span className="text-xs text-gray-600 font-medium mt-1 group-hover:text-gray-500 transition-colors">
+        {sub}
+      </span>
     </div>
-  );
-}
+  </div>
+);
 
-export default LabelXHero;
+const FloatingParticles = () => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <motion.div
+      animate={{
+        y: [0, -40, 0],
+        opacity: [0.1, 0.3, 0.1],
+        rotate: [0, 45, 0]
+      }}
+      transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-1/4 left-[10%] w-64 h-64 rounded-full bg-[#FF7A1A]/5 blur-[40px]"
+    />
+    <motion.div
+      animate={{
+        y: [0, 60, 0],
+        opacity: [0.1, 0.2, 0.1],
+        rotate: [0, -30, 0]
+      }}
+      transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      className="absolute bottom-1/3 right-[5%] w-48 h-48 rounded-full bg-[#FDD536]/5 blur-[40px]"
+    />
+  </div>
+);
+
+// Exporting as Hero as requested
+export default Hero;
