@@ -11,8 +11,10 @@ import {
   animate,
   useInView
 } from 'framer-motion';
-import { FaWallet, FaBrain, FaCoins, FaCheckDouble, FaUserGroup, FaArrowRight } from 'react-icons/fa6';
+import { FaWallet, FaBrain, FaCoins, FaCheckDouble, FaUserGroup } from 'react-icons/fa6';
 import { IoRocketOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
+import { RiTwitterXFill } from "react-icons/ri";
+import Link from 'next/link';
 
 // --- 1. Lenis Smooth Scroll Setup ---
 const useLenis = () => {
@@ -287,7 +289,7 @@ const AboutSection = () => {
       {/* Divider */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
           <div className="max-w-2xl">
@@ -295,7 +297,7 @@ const AboutSection = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
+              className="text-4xl heading md:text-5xl font-bold tracking-tight mb-6"
             >
               What is <span className="text-[#FF7A1A]">LabelX?</span>
             </motion.h2>
@@ -304,22 +306,24 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-lg text-gray-400 leading-relaxed"
+              className="text-lg text-gray-300/80 leading-relaxed"
             >
               LabelX is a platform where you earn real cryptocurrency by helping train artificial intelligence. 
               Think of it as getting paid to teach computers how to see, understand, and think better. 
-              Every time you label an image, review text, or verify data, you're making AI smarter—and 
+              Every time you label an image, review text, or verify data, you're making AI smarter and 
               getting LBLX tokens sent straight to your wallet.
             </motion.p>
           </div>
-          <motion.button 
+          <Link href='https://x.com/AI_UR_Alfredo' target='_blank'>
+          <motion.div 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] transition-colors text-sm font-medium group"
-          >
-            Start Tutorial <FaArrowRight className="w-3 h-3 text-[#FF7A1A] group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+            >
+            Follow on <RiTwitterXFill size={20} className="text-[#FF7A1A] group-hover:translate-x-1 transition-transform" />
+          </motion.div>
+        </Link>
         </div>
 
         {/* Bento Grid */}
