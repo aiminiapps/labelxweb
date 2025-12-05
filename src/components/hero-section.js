@@ -1,215 +1,372 @@
 'use client';
-import React, { useRef, useState } from 'react';
-import { motion, useSpring, useMotionValue, useTransform, useScroll } from 'framer-motion';
-import { FaTelegramPlane, FaArrowRight } from 'react-icons/fa';
-import { BsStars } from 'react-icons/bs';
-import Herocobe from './ui/hero-element';
+import { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { HiArrowRight } from 'react-icons/hi2';
+import Link from 'next/link';
 
-// --- 1. Your Custom Magnetic Wrapper ---
-const MagneticWrapper = ({ children, strength = 0.5 }) => {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+const LabelXHero = () => {
+  const heroRef = useRef(null);
+  const contentRef = useRef(null);
+  const isInView = useInView(contentRef, { once: true, amount: 0.2 });
 
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
-    x.set((clientX - centerX) * strength);
-    y.set((clientY - centerY) * strength);
-  };
+  // Smooth parallax
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
 
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
-      className="inline-block" // Ensure it wraps content tightly
+    <section 
+      ref={heroRef}
+      className="relative min-h-screen w-full bg-black overflow-hidden flex items-center justify-center"
     >
-      {children}
-    </motion.div>
-  );
-};
+      {/* Animated Mesh Gradient Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Main Gradient Orbs */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-[-20%] left-[10%] w-[600px] h-[600px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, #FF7A1A 0%, transparent 70%)',
+            filter: 'blur(100px)',
+          }}
+        />
 
-// --- 2. Main Hero Component ---
-export default function Hero() {
-  const containerRef = useRef(null);
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute top-[20%] right-[5%] w-[500px] h-[500px] rounded-full opacity-25"
+          style={{
+            background: 'radial-gradient(circle, #FDD536 0%, transparent 70%)',
+            filter: 'blur(90px)',
+          }}
+        />
 
-  // Background Parallax Logic (Kept subtle as requested)
-  const { scrollY } = useScroll();
-  const yBg = useTransform(scrollY, [0, 1000], [0, 200]);
+        <motion.div
+          animate={{
+            scale: [1, 1.15, 1],
+            x: [0, 40, 0],
+            y: [0, -40, 0],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 5
+          }}
+          className="absolute bottom-[10%] left-[30%] w-[700px] h-[700px] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, #FF7A1A 0%, transparent 70%)',
+            filter: 'blur(120px)',
+          }}
+        />
 
-  // Mouse Parallax for Background Light
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 40, damping: 25 });
-  const smoothY = useSpring(mouseY, { stiffness: 40, damping: 25 });
+        {/* Mesh Grid Overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 122, 26, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 122, 26, 0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
 
-  function handleMouseMove({ clientX, clientY }) {
-    if (typeof window !== 'undefined') {
-      const x = (clientX / window.innerWidth) - 0.5;
-      const y = (clientY / window.innerHeight) - 0.5;
-      mouseX.set(x);
-      mouseY.set(y);
-    }
-  }
+        {/* Radial Fade Overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 70%, #000 100%)',
+          }}
+        />
+      </div>
 
-  return (
-    <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="relative w-full min-h-screen bg-[#000000] flex items-center font-sans selection:bg-[#FFD60A] selection:text-black"
-    >
-      <motion.div style={{ y: yBg }} className="absolute inset-0 pointer-events-none z-0">
-        {/* Massive Dynamic Light Source */}
-        <TiltLayer mouseX={smoothX} mouseY={smoothY} depth={-5}>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[900px] bg-[conic-gradient(from_0deg_at_50%_50%,#FFD60A_0deg,#5856D6_120deg,#FFD60A_240deg)] opacity-15 blur-[160px] rounded-[100%]" />
-        </TiltLayer>
-        
-        {/* Grain & Grid Texture */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04]" />
-      </motion.div>
-      <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full pt-20">
-        
-        {/* --- LEFT SIDE: Copy & Actions --- */}
-        <div className="space-y-10 max-w-4xl">
-          
-          {/* Badge */}
+      {/* Main Content */}
+      <motion.div
+        ref={contentRef}
+        style={{ y, opacity }}
+        className="relative z-10 w-full max-w-6xl mx-auto px-6 py-32"
+      >
+        {/* Live Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: -20 }}
+          animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+          transition={{ 
+            duration: 0.6, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.1 
+          }}
+          className="flex justify-center mb-16"
+        >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_0_20px_rgba(255,214,10,0.1)]"
+            whileHover={{ scale: 1.05 }}
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:bg-white/[0.05] transition-colors cursor-pointer"
           >
-            <BsStars className="text-[#FFD60A] text-xs" />
-            <span className="text-[11px] uppercase tracking-[0.2em] text-white/80 font-semibold">
-              The AI Consensus Layer
+            <motion.div
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="relative flex items-center justify-center"
+            >
+              <div className="w-2 h-2 rounded-full bg-green-400" />
+              <div className="absolute w-2 h-2 rounded-full bg-green-400 animate-ping" />
+            </motion.div>
+            <span className="text-sm font-medium text-gray-400 group-hover:text-gray-300 transition-colors">
+              Live on Binance Smart Chain
             </span>
           </motion.div>
+        </motion.div>
 
-          {/* New Creative Title */}
-          <div className="relative">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.2, 1, 0.2, 1] }}
-              className="text-5xl heading md:text-7xl font-bold tracking-tight text-white leading-[1.1]"
+        {/* Main Headline - Ultra Large */}
+        <div className="text-center mb-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ 
+              duration: 0.8, 
+              delay: 0.2, 
+              ease: [0.16, 1, 0.3, 1] 
+            }}
+            className="text-[56px] sm:text-[72px] md:text-[84px] lg:text-[96px] xl:text-[108px] font-bold tracking-[-0.02em] leading-[1.05] mb-0 px-4"
+          >
+            <motion.span 
+              className="block text-white"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              Refining Intelligence.
-            </motion.h1>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.2, 1, 0.2, 1] }}
-              className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FFD60A] via-[#FF9500] to-[#FFD60A] leading-[1.1] pb-2"
+              Train AI and earn
+            </motion.span>
+            <motion.span 
+              className="block text-white mt-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
             >
-              Rewarding Humanity.
-            </motion.h1>
-          </div>
+              real crypto rewards.
+            </motion.span>
+          </motion.h1>
+        </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg text-neutral-400 max-w-lg leading-relaxed font-light"
-          >
-            Join the decentralized workforce training the next generation of AI models. Verify data, earn points, and claim $LBLX.
-          </motion.p>
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ 
+            duration: 0.7, 
+            delay: 0.6, 
+            ease: [0.16, 1, 0.3, 1] 
+          }}
+          className="text-center text-[18px] md:text-[20px] leading-[1.6] text-gray-400 max-w-[680px] mx-auto mb-14 font-normal px-4"
+        >
+          Label data, complete simple tasks, and receive LBLX tokens directly to your wallet. Get paid for helping build smarter AI.
+        </motion.p>
 
-          {/* Magnetic Buttons (Using your custom wrapper) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-wrap gap-6 pt-2 items-center"
-          >
-            {/* Primary Button */}
-            <MagneticWrapper strength={0.6}>
-              <button className="relative group px-8 py-4 rounded-full bg-[#FFD60A] text-black font-bold text-sm uppercase tracking-wider overflow-hidden transition-all hover:shadow-[0_0_40px_rgba(255,214,10,0.5)]">
-                <span className="relative z-10 flex items-center gap-2">
-                  <FaTelegramPlane className="text-lg" />
-                  Launch Agent
-                </span>
-                {/* Shine Effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent z-0" />
-              </button>
-            </MagneticWrapper>
-
-            {/* Secondary Button */}
-            <MagneticWrapper strength={0.3}>
-              <button className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-semibold text-sm uppercase tracking-wider backdrop-blur-md hover:bg-white/10 transition-colors flex items-center gap-2 group">
-                How it works
-                <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform duration-300 text-[#FFD60A]" />
-              </button>
-            </MagneticWrapper>
-          </motion.div>
-
-          {/* Real Social Proof (Avatars) */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex items-center gap-5 pt-8 border-t border-white/10"
-          >
-            {/* Real Avatar Stack */}
-            <div className="flex -space-x-4">
-              {[
-                'https://i.pravatar.cc/150?img=33',
-                'https://i.pravatar.cc/150?img=47',
-                'https://i.pravatar.cc/150?img=12',
-                'https://i.pravatar.cc/150?img=68'
-              ].map((src, i) => (
-                <div 
-                    key={i} 
-                    className="relative w-12 h-12 rounded-full border-[3px] border-black overflow-hidden ring-1 ring-white/20"
+        {/* CTA Buttons - Exact Style from Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ 
+            duration: 0.7, 
+            delay: 0.75, 
+            ease: [0.16, 1, 0.3, 1] 
+          }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-32"
+        >
+          {/* Primary Button - Green Gradient Style */}
+          <Link href="/?tab=task2">
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="group relative px-8 py-4 rounded-[16px] text-white font-semibold text-[16px] overflow-hidden shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-shadow"
+              style={{
+                background: 'linear-gradient(135deg, #0a8f5a 0%, #0d6d4a 100%)',
+              }}
+            >
+              {/* Hover Shine Effect */}
+              <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%)',
+                }}
+              />
+              
+              {/* Button Content */}
+              <span className="relative flex items-center gap-2.5">
+                Get Started
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ 
+                    duration: 1.5, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="inline-flex"
                 >
-                    <img src={src} alt="User" className="w-full h-full object-cover" />
+                  <HiArrowRight className="w-5 h-5" strokeWidth={2} />
+                </motion.span>
+              </span>
+
+              {/* Border Glow on Hover */}
+              <motion.div
+                className="absolute inset-0 rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.1)',
+                }}
+              />
+            </motion.button>
+          </Link>
+
+          {/* Secondary Button - Ghost Style */}
+          <Link href="#how-it-works">
+            <motion.button
+              whileHover={{ 
+                scale: 1.03,
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                borderColor: 'rgba(255, 255, 255, 0.2)'
+              }}
+              whileTap={{ scale: 0.97 }}
+              className="group relative px-8 py-4 rounded-[16px] text-white font-semibold text-[16px] border-[1.5px] border-white/10 bg-transparent backdrop-blur-sm transition-all duration-300"
+            >
+              <span className="relative flex items-center gap-2">
+                Read Docs
+              </span>
+            </motion.button>
+          </Link>
+        </motion.div>
+
+        {/* Stats Section - Clean & Minimal */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ 
+            duration: 0.8, 
+            delay: 0.9, 
+            ease: [0.16, 1, 0.3, 1] 
+          }}
+          className="relative"
+        >
+          {/* Divider Line */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          
+          <div className="grid grid-cols-3 gap-8 md:gap-16 max-w-4xl mx-auto pt-16">
+            {[
+              { 
+                value: '50-250', 
+                label: 'LBLX per task',
+                delay: 1.0
+              },
+              { 
+                value: '10,000+', 
+                label: 'Active users',
+                delay: 1.1
+              },
+              { 
+                value: 'Instant', 
+                label: 'Payouts',
+                delay: 1.2
+              },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: stat.delay,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="text-center group cursor-default"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.08, y: -4 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="inline-block"
+                >
+                  <div className="text-[36px] md:text-[44px] lg:text-[48px] font-bold text-white mb-2 leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-yellow-400 transition-all duration-300">
+                    {stat.value}
+                  </div>
+                </motion.div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 font-medium group-hover:text-gray-400 transition-colors">
+                  {stat.label}
                 </div>
-              ))}
-              <div className="w-12 h-12 rounded-full border-[3px] border-black bg-neutral-800 flex items-center justify-center text-xs font-bold text-white ring-1 ring-white/20">
-                +4k
-              </div>
-            </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
 
-            <div className="flex flex-col">
-               <div className="flex items-center gap-1">
-                 <span className="text-xl font-bold text-white">52,891</span>
-                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-               </div>
-               <p className="text-sm text-neutral-500 font-medium">Active Labelers Online</p>
-            </div>
-          </motion.div>
-        </div>
+      {/* Scroll Indicator - Premium Mouse Animation */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.4 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ 
+            duration: 2.5, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="relative flex flex-col items-center gap-2 cursor-pointer group"
+        >
+          {/* Mouse Icon */}
+          <div className="w-[28px] h-[45px] border-[2.5px] border-white/20 rounded-full flex items-start justify-center p-[7px] group-hover:border-white/40 transition-colors">
+            <motion.div
+              animate={{ 
+                y: [0, 12, 0],
+                opacity: [0.3, 1, 0.3]
+              }}
+              transition={{ 
+                duration: 2.5, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-[3.5px] h-[7px] bg-white/70 rounded-full"
+            />
+          </div>
+        </motion.div>
+      </motion.div>
 
-        <div className="flex justify-center items-center h-full min-h-[600px] w-full relative">
-            <Herocobe/>
-        </div>
-
-      </div>
+      {/* Bottom Gradient Fade */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, #000 0%, transparent 100%)',
+        }}
+      />
     </section>
   );
-}
-
-// --- Helper: Tilt Layer for Background ---
-const TiltLayer = ({ children, mouseX, mouseY, depth, className = "" }) => {
-  const x = useTransform(mouseX, [-0.5, 0.5], [-depth, depth]);
-  const y = useTransform(mouseY, [-0.5, 0.5], [-depth, depth]);
-  
-  return (
-    <motion.div style={{ x, y }} className={`transform-gpu ${className}`}>
-      {children}
-    </motion.div>
-  );
 };
+
+export default LabelXHero;
