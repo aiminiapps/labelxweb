@@ -3,16 +3,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { 
   motion, 
-  useScroll, 
-  useTransform, 
-  useSpring,
   useMotionTemplate, 
   useMotionValue,
   animate,
   useInView
 } from 'framer-motion';
-import { FaWallet, FaBrain, FaCoins, FaCheckDouble, FaUserGroup } from 'react-icons/fa6';
-import { IoRocketOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
+import { FaCoins, FaUser } from 'react-icons/fa6';
+import { IoShieldCheckmarkOutline } from 'react-icons/io5';
+import { RiListCheck2 } from "react-icons/ri";
+import { TbWallet } from "react-icons/tb";
+import { GiProcessor } from "react-icons/gi";
+import { MdOutlineBuild } from "react-icons/md";
 import { RiTwitterXFill } from "react-icons/ri";
 import Link from 'next/link';
 
@@ -335,32 +336,82 @@ const AboutSection = () => {
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-2xl bg-[#FF7A1A]/10 text-[#FF7A1A]">
-                    <IoRocketOutline className="w-6 h-6" />
+                    <MdOutlineBuild size={23} />
                   </div>
                   <h3 className="text-2xl font-semibold">Why We Built This</h3>
                 </div>
-                <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
-                  AI is everywhere—from your phone's camera to voice assistants. But someone has to teach these systems how to work. 
+                <p className="text-gray-300/80 text-base leading-relaxed max-w-xl">
+                  AI is everywhere from your phone's camera to voice assistants. But someone has to teach these systems how to work. 
                   That's where you come in. We believe the people doing the actual work should get paid fairly and instantly.
                 </p>
               </div>
               
-              {/* Abstract Visual - Neural Network Connection */}
-              <div className="relative h-48 mt-8 w-full overflow-hidden rounded-xl border border-white/5 bg-black/40">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,122,26,0.1),transparent_70%)]" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex gap-12 items-center opacity-60">
-                    <FaUserGroup className="w-12 h-12 text-gray-500" />
-                    <motion.div 
-                      animate={{ x: [0, 20, 0], opacity: [0.2, 1, 0.2] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="flex gap-2"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-                      <div className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-                      <div className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-                    </motion.div>
-                    <FaBrain className="w-16 h-16 text-[#FF7A1A]" />
+{/* Premium Stable Visual - Teaching AI Illustration */}
+<div className="relative h-48 mt-8 w-full overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-black/60 to-[#FF7A1A]/5">
+                {/* Ambient Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,122,26,0.15),transparent_60%)]" />
+                
+                {/* Grid Pattern Overlay */}
+                <div className="absolute inset-0 opacity-20" style={{
+                  backgroundImage: 'linear-gradient(rgba(255,122,26,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,122,26,0.1) 1px, transparent 1px)',
+                  backgroundSize: '30px 30px'
+                }} />
+                
+                <div className="absolute inset-0 flex items-center justify-center px-8">
+                  <div className="flex gap-16 items-center">
+                    {/* People/Workers Section */}
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="flex gap-4">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF7A1A]/20 to-[#FF7A1A]/5 border border-[#FF7A1A]/30 flex items-center justify-center shadow-lg shadow-[#FF7A1A]/10">
+                          <FaUser className="w-6 h-6 text-[#FF7A1A]" />
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF7A1A]/20 to-[#FF7A1A]/5 border border-[#FF7A1A]/30 flex items-center justify-center shadow-lg shadow-[#FF7A1A]/10">
+                          <FaUser className="w-6 h-6 text-[#FF7A1A]" />
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF7A1A]/20 to-[#FF7A1A]/5 border border-[#FF7A1A]/30 flex items-center justify-center shadow-lg shadow-[#FF7A1A]/10">
+                          <FaUser className="w-6 h-6 text-[#FF7A1A]" />
+                        </div>
+                      </div>
+                      <div className="text-xs font-medium text-gray-400 tracking-wider">TRAINERS</div>
+                    </div>
+
+                    {/* Connection Lines */}
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-20 h-px bg-gradient-to-r from-[#FF7A1A]/50 to-[#FF7A1A]/20" />
+                      <div className="w-20 h-px bg-gradient-to-r from-[#FF7A1A]/30 to-[#FF7A1A]/10" />
+                      <div className="w-20 h-px bg-gradient-to-r from-[#FF7A1A]/50 to-[#FF7A1A]/20" />
+                    </div>
+
+                    {/* AI Brain Center */}
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-[#FF7A1A]/20 blur-2xl rounded-full" />
+                        <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-[#FF7A1A]/30 to-[#FF7A1A]/10 border border-[#FF7A1A]/40 flex items-center justify-center shadow-2xl shadow-[#FF7A1A]/20">
+                          <GiProcessor className="w-12 h-12 text-[#FF7A1A]" />
+                        </div>
+                      </div>
+                      <div className="text-xs font-medium text-gray-400 tracking-wider">AI SYSTEM</div>
+                    </div>
+
+                    {/* Connection Lines */}
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-20 h-px bg-gradient-to-r from-[#FF7A1A]/20 to-green-500/50" />
+                      <div className="w-20 h-px bg-gradient-to-r from-[#FF7A1A]/10 to-green-500/30" />
+                      <div className="w-20 h-px bg-gradient-to-r from-[#FF7A1A]/20 to-green-500/50" />
+                    </div>
+
+                    {/* Payment Section */}
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="flex gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 flex items-center justify-center shadow-lg shadow-green-500/10">
+                          <span className="text-green-400 text-xl font-bold">$</span>
+                        </div>
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 flex items-center justify-center shadow-lg shadow-green-500/10">
+                          <span className="text-green-400 text-xl font-bold">$</span>
+                        </div>
+                      </div>
+                      <div className="text-xs font-medium text-green-400 tracking-wider">INSTANT PAY</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -373,12 +424,12 @@ const AboutSection = () => {
                <div className="mb-auto">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-2xl bg-blue-500/10 text-blue-400">
-                    <FaWallet className="w-6 h-6" />
+                    <TbWallet className="w-6 h-6" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-400/80 border border-blue-500/20 px-2 py-1 rounded-full">Step 1</span>
                 </div>
                 <h3 className="text-2xl font-semibold mb-2">Connect Your Wallet</h3>
-                <p className="text-gray-400">Link MetaMask or any Web3 wallet in seconds. No complicated signup forms.</p>
+                <p className="text-gray-300/80">Link MetaMask or any Web3 wallet in seconds. No complicated signup forms.</p>
               </div>
 
               {/* Wallet UI Mockup */}
@@ -387,8 +438,8 @@ const AboutSection = () => {
                    <div className="w-12 h-2 rounded-full bg-white/10" />
                    <div className="w-4 h-4 rounded-full bg-green-500/20" />
                 </div>
-                <div className="h-24 rounded-lg bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/10 flex items-center justify-center">
-                   <span className="text-blue-400 font-mono text-sm">0x3f...8a91</span>
+                <div className="h-24 rounded-lg border border-[#FF8533]/30 flex items-center justify-center">
+                   <span className="text-[#FF8533] font-mono text-sm">0x3f...8a91</span>
                 </div>
                 <motion.div 
                   initial={{ scale: 0.9, opacity: 0 }}
@@ -410,12 +461,12 @@ const AboutSection = () => {
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-400">
-                   <FaCheckDouble className="w-6 h-6" />
+                   <RiListCheck2 className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider text-purple-400/80 border border-purple-500/20 px-2 py-1 rounded-full">Step 2</span>
               </div>
               <h3 className="text-xl font-semibold mb-2">Pick a Task</h3>
-              <p className="text-gray-400 text-sm mb-6">Browse available jobs—label images, verify text, check data quality.</p>
+              <p className="text-gray-300/80 text-sm mb-6">Browse available jobs—label images, verify text, check data quality.</p>
               
               {/* Task UI Visual */}
               <div className="mt-auto relative space-y-2">
@@ -448,7 +499,7 @@ const AboutSection = () => {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#FDD536]/80 border border-[#FDD536]/20 px-2 py-1 rounded-full">Step 3</span>
               </div>
               <h3 className="text-xl font-semibold mb-2">Get Paid Instantly</h3>
-              <p className="text-gray-400 text-sm mb-6">LBLX tokens hit your wallet immediately. Trade or hold.</p>
+              <p className="text-gray-300/80 text-sm mb-6">LBLX tokens hit your wallet immediately. Trade or hold.</p>
               
               {/* Payment Visual */}
               <div className="mt-auto h-32 relative bg-[#1A1A1A] rounded-xl border border-[#FDD536]/10 overflow-hidden flex items-end">
@@ -481,7 +532,7 @@ const AboutSection = () => {
                   </div>
                   <h3 className="text-xl font-semibold">No Middlemen</h3>
                 </div>
-                <p className="text-gray-400 text-sm mb-6">
+                <p className="text-gray-300/80 text-sm mb-6">
                   Traditional companies keep the profits. We believe in direct rewards for your effort.
                 </p>
                 <div className="mt-auto flex justify-center py-6">
