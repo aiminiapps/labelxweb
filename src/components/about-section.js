@@ -306,7 +306,7 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-lg text-gray-300/80 leading-relaxed"
+              className="text-base text-gray-300/80 leading-relaxed"
             >
               LabelX is a platform where you earn real cryptocurrency by helping train artificial intelligence. 
               Think of it as getting paid to teach computers how to see, understand, and think better. 
