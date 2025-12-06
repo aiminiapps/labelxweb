@@ -715,8 +715,8 @@ const AgentsSection = () => {
             <div className="p-4 bg-black/60 border-t border-white/5 flex justify-between items-center backdrop-blur-sm">
                <div className="flex gap-4 text-xs text-gray-500 font-mono">
                   <span>Ln 42, Col 12</span>
-                  <span>UTF-8</span>
-                  <span>JavaScript</span>
+                  <span className='hidden sm:block'>UTF-8</span>
+                  <span className='hidden sm:block'>JavaScript</span>
                </div>
                <button className="px-4 py-1.5 rounded-lg bg-[#FF7A1A] text-black text-xs font-bold hover:bg-[#ff9040] transition-colors flex items-center gap-2">
                   DEPLOY AGENT <FaArrowRight />
