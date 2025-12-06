@@ -3,9 +3,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { 
   motion, 
-  useScroll, 
-  useTransform, 
-  useSpring,
   useMotionTemplate, 
   useMotionValue,
   animate,
@@ -30,39 +27,6 @@ import {
 import { GrValidate } from "react-icons/gr";
 import { BsBarChartLine } from "react-icons/bs";
 import { FaNetworkWired } from "react-icons/fa6";
-
-// --- 1. Lenis Smooth Scroll Setup ---
-const useLenis = () => {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js";
-    script.async = true;
-    script.onload = () => {
-      const lenis = new window.Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-      });
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-};
-
-// --- 2. Micro-Interaction Icons ---
 
 const drawTransition = {
   duration: 1.2,
@@ -464,8 +428,6 @@ const AboutSection = () => {
     </section>
   );
 };
-
-// --- 7. NEW: AI Agents Section ---
 
 const agents = [
   {
