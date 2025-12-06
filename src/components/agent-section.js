@@ -12,12 +12,10 @@ import {
   useInView,
   AnimatePresence
 } from 'framer-motion';
-// Using standard react-icons/fa for maximum compatibility
 import { 
   FaWallet, 
   FaBrain, 
   FaCoins, 
-  FaCheckDouble, 
   FaUsers, 
   FaArrowRight, 
   FaRocket, 
@@ -26,11 +24,12 @@ import {
   FaComments,
   FaHeadphones,
   FaLayerGroup,
-  FaBolt,
-  FaChartLine,
   FaCode,
   FaTerminal
 } from 'react-icons/fa';
+import { GrValidate } from "react-icons/gr";
+import { BsBarChartLine } from "react-icons/bs";
+import { FaNetworkWired } from "react-icons/fa6";
 
 // --- 1. Lenis Smooth Scroll Setup ---
 const useLenis = () => {
@@ -379,7 +378,7 @@ const AboutSection = () => {
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-3 rounded-2xl bg-purple-500/10 text-purple-400">
-                   <FaCheckDouble className="w-6 h-6" />
+                   <GrValidate className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider text-purple-400/80 border border-purple-500/20 px-2 py-1 rounded-full">Step 2</span>
               </div>
@@ -508,7 +507,7 @@ const agents = [
   {
     id: 'validator',
     name: 'Data Validator',
-    icon: FaCheckDouble,
+    icon: GrValidate,
     color: '#10B981',
     specialty: 'Quality Control & Verification',
     desc: 'Reviews and verifies work from other labelers. Ensures high-quality datasets.',
@@ -536,28 +535,15 @@ const AgentsSection = () => {
   const activeAgent = agents.find(a => a.id === selectedAgentId);
 
   return (
-    <section className="relative w-full py-32 bg-[#050505] text-white overflow-hidden border-t border-white/5">
-      {/* Background Tech Mesh */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_100%,transparent_0%)] opacity-50 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
+    <section className="relative w-full py-16  text-white overflow-hidden">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20 max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#FF7A1A] text-sm font-medium mb-6"
-          >
-            <FaBrain className="w-4 h-4" /> AI Workforce
-          </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+            className="text-4xl md:text-5xl heading lg:text-6xl font-bold tracking-tight mb-6"
           >
             Meet Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A1A] to-[#FDD536]">AI Assistants</span>
           </motion.h2>
@@ -566,18 +552,18 @@ const AgentsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-gray-400"
+            className="text-lg text-gray-400 text-balance"
           >
             Smart agents that help you complete tasks faster, earn more, and master data labeling. 
-            Each specialist is trained for specific work—choose your partner.
+            Each specialist is trained for specific work choose your partner.
           </motion.p>
         </div>
 
         {/* Top Features Row (Bento Style) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {[
-            { icon: FaBolt, title: "Work Faster", desc: "Agents pre-analyze data, cutting work time by 50%." },
-            { icon: FaChartLine, title: "Track Progress", desc: "Real-time stats on accuracy and earnings per agent." },
+            { icon: FaNetworkWired, title: "Work Faster", desc: "Agents pre-analyze data, cutting work time by 50%." },
+            { icon: BsBarChartLine, title: "Track Progress", desc: "Real-time stats on accuracy and earnings per agent." },
             { icon: FaCode, title: "Learn as You Go", desc: "Each agent teaches you techniques to level up." }
           ].map((feat, i) => (
             <motion.div
@@ -588,11 +574,11 @@ const AgentsSection = () => {
               transition={{ delay: i * 0.1 }}
               className="p-6 rounded-2xl bg-[#0F0F0F] border border-white/5 hover:border-white/10 transition-colors group"
             >
-              <div className="flex items-center gap-4 mb-3">
+              <div className="flex items-center gap-4">
                 <div className="p-2 rounded-lg bg-white/5 text-white group-hover:text-[#FF7A1A] transition-colors">
                   <feat.icon className="w-5 h-5" />
                 </div>
-                <h4 className="font-semibold text-lg">{feat.title}</h4>
+                <h4 className="font-semibold text-lg heading">{feat.title}</h4>
               </div>
               <p className="text-sm text-gray-400 pl-[52px]">{feat.desc}</p>
             </motion.div>
