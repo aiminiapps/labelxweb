@@ -434,7 +434,7 @@ const AboutSection = () => {
                 <span className="text-xs font-bold uppercase tracking-wider text-purple-400/80 border border-purple-500/20 px-2 py-1 rounded-full">Step 2</span>
               </div>
               <h3 className="text-xl font-semibold heading mb-2">Pick a Task</h3>
-              <p className="text-gray-300/80 text-sm mb-6">Browse available jobs—label images, verify text, check data quality.</p>
+              <p className="text-gray-300/80 text-sm mb-6">Browse available jobs label images, verify text, check data quality.</p>
               
               {/* Task UI Visual */}
               <div className="mt-auto relative space-y-2">
