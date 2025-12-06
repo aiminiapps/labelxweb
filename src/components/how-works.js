@@ -470,7 +470,7 @@ const HowItWorksSection = () => {
               {/* Inner UI Visual */}
               <div className="h-48 rounded-2xl bg-[#0F0F0F] border border-white/5 mb-6 overflow-hidden relative group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] transition-shadow duration-500">
                  <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                 <div className="p-6 h-full">
+                 <div className="p-2 h-full">
                     <WalletSim />
                  </div>
               </div>
@@ -480,7 +480,7 @@ const HowItWorksSection = () => {
                  <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold mb-3 border border-blue-500/20">
                     STEP 1
                  </div>
-                 <h3 className="text-xl font-bold text-white mb-2">Connect Your Wallet</h3>
+                 <h3 className="text-xl font-bold text-white mb-2 heading">Connect Your Wallet</h3>
                  <p className="text-gray-400 text-sm leading-relaxed">
                     Click "Connect Wallet" and approve MetaMask. Takes 10 seconds. No personal info required.
                  </p>
@@ -497,7 +497,7 @@ const HowItWorksSection = () => {
            >
               <div className="h-48 rounded-2xl bg-[#0F0F0F] border border-white/5 mb-6 overflow-hidden relative group-hover:shadow-[0_0_30px_-5px_rgba(255,122,26,0.15)] transition-shadow duration-500">
                  <div className="absolute inset-0 bg-gradient-to-b from-[#FF7A1A]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                 <div className="p-6 h-full">
+                 <div className="p-2 h-full">
                     <TaskSelectorSim />
                  </div>
               </div>
@@ -506,7 +506,7 @@ const HowItWorksSection = () => {
                  <div className="inline-block px-3 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] text-xs font-bold mb-3 border border-[#FF7A1A]/20">
                     STEP 2
                  </div>
-                 <h3 className="text-xl font-bold text-white mb-2">Choose a Task</h3>
+                 <h3 className="text-xl font-bold text-white mb-2 heading">Choose a Task</h3>
                  <p className="text-gray-400 text-sm leading-relaxed">
                     Browse available tasks filtered by type and difficulty. Pick what interests you and start working.
                  </p>
@@ -523,7 +523,7 @@ const HowItWorksSection = () => {
            >
               <div className="h-48 rounded-2xl bg-[#0F0F0F] border border-white/5 mb-6 overflow-hidden relative group-hover:shadow-[0_0_30px_-5px_rgba(253,213,54,0.15)] transition-shadow duration-500">
                  <div className="absolute inset-0 bg-gradient-to-b from-[#FDD536]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                 <div className="p-6 h-full">
+                 <div className="p-2 h-full">
                     <PayoutSim />
                  </div>
               </div>
@@ -532,7 +532,7 @@ const HowItWorksSection = () => {
                  <div className="inline-block px-3 py-1 rounded-full bg-[#FDD536]/10 text-[#FDD536] text-xs font-bold mb-3 border border-[#FDD536]/20">
                     STEP 3
                  </div>
-                 <h3 className="text-xl font-bold text-white mb-2">Get Paid Instantly</h3>
+                 <h3 className="text-xl font-bold text-white mb-2 heading">Get Paid Instantly</h3>
                  <p className="text-gray-400 text-sm leading-relaxed">
                     Submit your work and watch LBLX tokens appear in your wallet instantly. No waiting periods.
                  </p>
