@@ -338,7 +338,7 @@ const AboutSection = () => {
                   <div className="p-3 rounded-2xl bg-[#FF7A1A]/10 text-[#FF7A1A]">
                     <MdOutlineBuild size={23} />
                   </div>
-                  <h3 className="text-2xl font-semibold">Why We Built This</h3>
+                  <h3 className="text-2xl font-semibold heading">Why We Built This</h3>
                 </div>
                 <p className="text-gray-300/80 text-base leading-relaxed max-w-xl">
                   AI is everywhere from your phone's camera to voice assistants. But someone has to teach these systems how to work. 
@@ -428,7 +428,7 @@ const AboutSection = () => {
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-blue-400/80 border border-blue-500/20 px-2 py-1 rounded-full">Step 1</span>
                 </div>
-                <h3 className="text-2xl font-semibold mb-2">Connect Your Wallet</h3>
+                <h3 className="text-2xl font-semibold heading mb-2">Connect Your Wallet</h3>
                 <p className="text-gray-300/80">Link MetaMask or any Web3 wallet in seconds. No complicated signup forms.</p>
               </div>
 
@@ -465,7 +465,7 @@ const AboutSection = () => {
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider text-purple-400/80 border border-purple-500/20 px-2 py-1 rounded-full">Step 2</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Pick a Task</h3>
+              <h3 className="text-xl font-semibold heading mb-2">Pick a Task</h3>
               <p className="text-gray-300/80 text-sm mb-6">Browse available jobs—label images, verify text, check data quality.</p>
               
               {/* Task UI Visual */}
@@ -498,7 +498,7 @@ const AboutSection = () => {
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider text-[#FDD536]/80 border border-[#FDD536]/20 px-2 py-1 rounded-full">Step 3</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Get Paid Instantly</h3>
+              <h3 className="text-xl heading font-semibold mb-2">Get Paid Instantly</h3>
               <p className="text-gray-300/80 text-sm mb-6">LBLX tokens hit your wallet immediately. Trade or hold.</p>
               
               {/* Payment Visual */}
@@ -530,7 +530,7 @@ const AboutSection = () => {
                   <div className="p-3 rounded-2xl bg-red-500/10 text-red-400">
                     <IoShieldCheckmarkOutline className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-semibold">No Middlemen</h3>
+                  <h3 className="text-xl heading font-semibold">No Middlemen</h3>
                 </div>
                 <p className="text-gray-300/80 text-sm mb-6">
                   Traditional companies keep the profits. We believe in direct rewards for your effort.
