@@ -7,7 +7,7 @@ import {
   useMotionValue,
   animate,
   useInView
-} from 'framer-motion';
+} from 'motion/react';
 import { FaCoins, FaUser } from 'react-icons/fa6';
 import { IoShieldCheckmarkOutline } from 'react-icons/io5';
 import { RiListCheck2 } from "react-icons/ri";
@@ -17,38 +17,6 @@ import { MdOutlineBuild } from "react-icons/md";
 import { RiTwitterXFill } from "react-icons/ri";
 import Link from 'next/link';
 
-// --- 1. Lenis Smooth Scroll Setup ---
-const useLenis = () => {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js";
-    script.async = true;
-    script.onload = () => {
-      const lenis = new window.Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-      });
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-};
-
-// --- 2. Micro-Interaction Icons (Draw Animations) ---
 
 const drawTransition = {
   duration: 1.2,

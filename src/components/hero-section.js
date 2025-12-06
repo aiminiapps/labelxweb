@@ -10,7 +10,7 @@ import {
   useMotionValue,
   animate,
   useInView
-} from 'framer-motion';
+} from 'motion/react';
 
 const useLenis = () => {
   useEffect(() => {

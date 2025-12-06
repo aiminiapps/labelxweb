@@ -8,7 +8,7 @@ import {
   animate,
   useInView,
   AnimatePresence
-} from 'framer-motion';
+} from 'motion/react';
 import { 
   FaWallet, 
   FaBrain, 
@@ -54,66 +54,6 @@ const AnimatedCheckIcon = ({ className }) => (
     />
   </motion.svg>
 );
-
-const AnimatedArrowRight = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-    <motion.path 
-      d="M5 12h14" 
-      initial={{ pathLength: 0 }} 
-      animate={{ pathLength: 1 }} 
-      transition={{ duration: 0.8, delay: 0.2 }} 
-    />
-    <motion.path 
-      d="M12 5l7 7-7 7" 
-      initial={{ pathLength: 0 }} 
-      animate={{ pathLength: 1 }} 
-      transition={{ duration: 0.8, delay: 0.4 }} 
-    />
-  </svg>
-);
-
-const AnimatedPlayIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M5 3l14 9-14 9V3z" />
-  </svg>
-);
-
-const AnimatedDocIcon = ({ className }) => {
-  return (
-    <motion.svg 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="1.5" 
-      className={className}
-      whileHover="hover"
-      initial="rest"
-    >
-      <motion.path 
-        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" 
-        variants={{ hover: { pathLength: [1, 0.8, 1] } }} 
-      />
-      <motion.path 
-        d="M14 2v6h6" 
-        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.1 } } }}
-      />
-      <motion.path 
-        d="M16 13H8" 
-        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.2 } } }}
-      />
-      <motion.path 
-        d="M16 17H8" 
-        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.3 } } }}
-      />
-      <motion.path 
-        d="M10 9H8" 
-        variants={{ hover: { pathLength: [1, 0, 1], transition: { delay: 0.4 } } }}
-      />
-    </motion.svg>
-  );
-};
-
-// --- 3. Animated Counter Component ---
 
 const Counter = ({ from = 0, to, duration = 2.5, suffix = "" }) => {
   const nodeRef = useRef();
