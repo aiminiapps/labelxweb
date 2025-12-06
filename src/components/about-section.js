@@ -535,7 +535,7 @@ const AboutSection = () => {
                 <p className="text-gray-300/80 text-sm mb-6">
                   Traditional companies keep the profits. We believe in direct rewards for your effort.
                 </p>
-                <div className="mt-auto flex justify-center py-6">
+                <div className="mt-10 flex justify-center py-6">
                    <div className="relative">
                       <div className="absolute inset-0 bg-red-500/20 blur-xl rounded-full" />
                       <div className="relative flex items-center gap-4 bg-black/40 px-4 py-2 rounded-xl border border-red-500/20">
