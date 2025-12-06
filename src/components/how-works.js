@@ -158,7 +158,7 @@ const PayoutSim = () => {
 const HowItWorksSection = () => {
   const faqs = [
     { q: "How Long Does It Take?", a: "Most tasks take 2-10 minutes. You can complete 6-30 tasks per hour." },
-    { q: "How Much Can I Earn?", a: "Beginners earn 50-150 LBLX/task. Experts up to 400 LBLX. Avg user earns 1,500/hr." },
+    { q: "How Much Can I Earn?", a: "Beginners earn 50-150 LBLX/task. Experts up to 300 LBLX. Avg user earns 500/hr." },
     { q: "What If I Make a Mistake?", a: "No penalties for honest errors. You'll get feedback to improve—no tokens deducted." },
     { q: "Can I Work Anytime?", a: "Yes! Tasks available 24/7. Work from anywhere, on any device." }
   ];
