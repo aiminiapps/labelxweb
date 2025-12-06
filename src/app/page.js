@@ -5,7 +5,7 @@ import HowItWorksSection from "@/components/how-works";
 
 export default function Home() {
   return (
-    <div className="min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="min-h-screen items-center justify-center bg-black selection:bg-[#FF7A1A]/30">
       <Hero/>
       <AboutSection/>
       <AgentsSection/>
