@@ -584,7 +584,7 @@ const AgentsSection = () => {
                   <agent.icon className="w-5 h-5" />
                 </div>
                 <div className="relative z-10">
-                  <h4 className={`font-semibold ${selectedAgentId === agent.id ? 'text-white' : 'text-gray-300'}`}>
+                  <h4 className={`font-semibold heading ${selectedAgentId === agent.id ? 'text-white' : 'text-gray-300'}`}>
                     {agent.name}
                   </h4>
                   <p className="text-xs text-gray-500 mt-1">{agent.difficulty} • {agent.earning}</p>
@@ -639,7 +639,7 @@ const AgentsSection = () => {
                 >
                   <div className="flex items-start justify-between mb-8">
                      <div>
-                       <h3 className="text-3xl font-bold text-white mb-2">{activeAgent.name}</h3>
+                       <h3 className="text-3xl heading font-bold text-white mb-2">{activeAgent.name}</h3>
                        <p className="text-lg text-gray-400 max-w-lg">{activeAgent.desc}</p>
                      </div>
                      <div className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/20">
@@ -689,7 +689,7 @@ const AgentsSection = () => {
                   </div>
 
                   <div className="mt-auto">
-                    <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Optimized For</h4>
+                    <h4 className="text-sm font-semibold text-gray-300 uppercase heading tracking-wider mb-4">Optimized For</h4>
                     <div className="flex flex-wrap gap-2">
                       {activeAgent.tasks.map((task, i) => (
                         <span key={i} className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-sm text-gray-300 hover:bg-white/10 transition-colors">
