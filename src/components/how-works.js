@@ -432,25 +432,17 @@ const HowItWorksSection = () => {
   ];
 
   return (
-    <section className="relative w-full py-32 bg-black text-white overflow-hidden border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="relative w-full py-18 bg-black text-white overflow-hidden">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center mb-20">
-           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#FF7A1A] text-sm font-medium mb-6"
-           >
-             <FaClock className="w-4 h-4" /> Quick Start Guide
-           </motion.div>
            <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+            className="text-4xl md:text-5xl heading lg:text-6xl font-bold tracking-tight mb-6"
            >
              Start Earning in <span className="text-[#FF7A1A]">3 Simple Steps</span>
            </motion.h2>
