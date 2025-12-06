@@ -458,7 +458,7 @@ const HowItWorksSection = () => {
         </div>
 
         {/* 3-Column Steps Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
            
            {/* Step 1 Card */}
            <motion.div 
@@ -542,8 +542,8 @@ const HowItWorksSection = () => {
         </div>
 
         {/* Info Grid (Good to Know) */}
-        <div className="mb-32">
-           <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
+        <div className="mb-8">
+           <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 heading">
               <FaQuestion className="text-[#FF7A1A]" /> Good to Know
            </h3>
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -556,39 +556,23 @@ const HowItWorksSection = () => {
                   transition={{ delay: i * 0.1 }}
                   className="p-6 rounded-2xl bg-[#0A0A0A] border border-white/10 hover:bg-[#111] transition-colors"
                 >
-                   <h4 className="font-semibold text-[#FF7A1A] mb-3 text-sm uppercase tracking-wide">{faq.q}</h4>
+                   <h4 className="font-semibold text-[#FF7A1A] mb-3 text-sm uppercase heading tracking-wide">{faq.q}</h4>
                    <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
                 </motion.div>
               ))}
            </div>
         </div>
-
-        {/* Trust Stats Bar */}
-        <div className="w-full py-8 border-y border-white/5 bg-white/[0.02] flex flex-wrap justify-center gap-8 md:gap-16 mb-24">
-            {[
-               { icon: FaUsers, text: "10,000+ Active Users" },
-               { icon: FaGlobeAmericas, text: "$2.4M+ Paid Out" },
-               { icon: FaStar, text: "4.8/5 Community Rating" },
-               { icon: FaHistory, text: "98% Satisfaction" }
-            ].map((stat, i) => (
-               <div key={i} className="flex items-center gap-3 text-gray-400 font-medium">
-                  <stat.icon className="text-[#FF7A1A]" />
-                  <span>{stat.text}</span>
-               </div>
-            ))}
-        </div>
-
         {/* Final CTA */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-[#111] to-black border border-white/10 text-center px-6 py-20"
+          className="relative hidden rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-[#111] to-black border border-white/10 text-center px-6 py-20"
         >
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,122,26,0.15),transparent_70%)]" />
            
            <div className="relative z-10 max-w-2xl mx-auto">
-             <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Start?</h2>
+             <h2 className="text-4xl md:text-5xl font-bold mb-6 heading">Ready to Start?</h2>
              <p className="text-xl text-gray-400 mb-10">Join the workforce of the future. Connect your wallet and start earning crypto in minutes.</p>
              
              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -606,53 +590,5 @@ const HowItWorksSection = () => {
     </section>
   );
 };
-
-// --- Helper Components ---
-
-const StatItem = ({ value, suffix, label, sub, color, iconColor, prefix = "" }) => (
-  <div className="group relative p-8 flex flex-col items-center justify-center hover:bg-white/[0.02] transition-colors duration-500">
-    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-b from-white/[0.03] to-transparent transition-opacity duration-500 pointer-events-none" />
-    
-    <div className="relative z-10 flex flex-col items-center">
-      <div className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b ${color} to-white/60 mb-2 tracking-tight`}>
-        {prefix}<Counter from={0} to={value} suffix={suffix} />
-      </div>
-      
-      <div className="flex items-center gap-2 mt-1">
-        <AnimatedCheckIcon className={`w-4 h-4 ${iconColor} opacity-80`} />
-        <span className="text-sm font-semibold text-gray-300 uppercase tracking-widest">
-          {label}
-        </span>
-      </div>
-      
-      <span className="text-xs text-gray-600 font-medium mt-1 group-hover:text-gray-500 transition-colors">
-        {sub}
-      </span>
-    </div>
-  </div>
-);
-
-const FloatingParticles = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <motion.div
-      animate={{
-        y: [0, -40, 0],
-        opacity: [0.1, 0.3, 0.1],
-        rotate: [0, 45, 0]
-      }}
-      transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute top-1/4 left-[10%] w-64 h-64 rounded-full bg-[#FF7A1A]/5 blur-[40px]"
-    />
-    <motion.div
-      animate={{
-        y: [0, 60, 0],
-        opacity: [0.1, 0.2, 0.1],
-        rotate: [0, -30, 0]
-      }}
-      transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      className="absolute bottom-1/3 right-[5%] w-48 h-48 rounded-full bg-[#FDD536]/5 blur-[40px]"
-    />
-  </div>
-);
 
 export default HowItWorksSection
