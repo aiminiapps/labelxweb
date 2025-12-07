@@ -1,6 +1,7 @@
 import AboutSection from "@/components/about-section";
 import AgentsSection from "@/components/agent-section";
 import CTASection from "@/components/cta-section";
+import Footer from "@/components/footer";
 import Hero from "@/components/hero-section";
 import HowItWorksSection from "@/components/how-works";
 import TestimonialSection from "@/components/testimonial-section";
@@ -14,6 +15,7 @@ export default function Home() {
       <HowItWorksSection/>
       <TestimonialSection/>
       <CTASection/>
+      <Footer/>
     </div>
   );
 }
