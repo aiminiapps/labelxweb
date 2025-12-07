@@ -5,15 +5,13 @@ import { motion } from 'motion/react';
 import { FaFingerprint, FaWallet, FaShapes, FaBolt, FaGlobeAmericas, FaCheck } from 'react-icons/fa';
 import { RiBnbLine } from "react-icons/ri";
 
-// --- The "Real" Users & Data ---
-// Content rewritten to be specific to LabelX: Micro-tasks, specific LBLX amounts, and varied use cases.
 const feedData = [
   {
     id: "tx-8821",
     user: "Javi M.",
     location: "Buenos Aires",
     role: "L2 Validator",
-    avatar: "https://images.unsplash.com/photo-1542596594-649edbc13630?q=80&w=1974&auto=format&fit=crop", // Candid, smiling
+    avatar: "https://images.unsplash.com/photo-1542596594-649edbc13630?q=80&w=1974&auto=format&fit=crop", 
     action: "Verified 50 Images",
     reward: "42.50 LBLX",
     time: "2m ago",
@@ -25,7 +23,7 @@ const feedData = [
     user: "Sophie K.",
     location: "Berlin",
     role: "RLHF Trainer",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop", // Edgy, urban
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop",
     action: "Text Analysis",
     reward: "115.00 LBLX",
     time: "12m ago",
@@ -37,7 +35,7 @@ const feedData = [
     user: "Dev_Ranjit",
     location: "Mumbai",
     role: "Full Stack Dev",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop", // Professional yet casual
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop",
     action: "Dataset API",
     reward: "Dev Grant",
     time: "1h ago",
@@ -49,7 +47,7 @@ const feedData = [
     user: "Crypto_Dad",
     location: "Ohio",
     role: "Node Operator",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop", // Normal guy
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop", 
     action: "Node Upkeep",
     reward: "1,200 LBLX",
     time: "3h ago",
@@ -219,11 +217,6 @@ const TestimonialSection = () => {
 
   return (
     <section className="relative w-full py-16  overflow-hidden">
-      
-      {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FF7A1A]/20 to-transparent" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#FF7A1A]/5 blur-[100px] rounded-full pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 relative z-10">
          
          {/* Section Header */}
