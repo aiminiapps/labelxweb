@@ -49,7 +49,7 @@ export const metadata = {
     url: "https://label-x.xyz",
     siteName: "LabelX",
     title: "LabelX - Train AI, Earn Crypto Rewards",
-    description: "Earn real cryptocurrency by labeling data for AI. Complete simple tasks and receive instant LBLX token payouts to your wallet. Join 10,000+ users on BSC.",
+    description: "Earn real cryptocurrency by labeling data for AI. Complete simple tasks and receive instant LBLX token payouts to your wallet. ",
     images: [
       {
         url: "/og.png",
@@ -67,7 +67,7 @@ export const metadata = {
     site: "@AI_UR_Alfredo",
     creator: "@AI_UR_Alfredo",
     title: "LabelX - Train AI, Earn Crypto Rewards",
-    description: "Earn real cryptocurrency by labeling data for AI. Complete simple tasks and get instant LBLX token payouts. Join 10,000+ users on BSC.",
+    description: "Earn real cryptocurrency by labeling data for AI. Complete simple tasks and get instant LBLX token payouts. ",
     images: ["/og.png"]
   },
 
