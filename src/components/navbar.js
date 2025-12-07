@@ -58,7 +58,7 @@ const Navbar = () => {
               
               {/* Desktop Socials */}
               <div className="hidden md:flex items-center gap-3 pr-2 border-r border-white/10">
-                <SocialLink icon={RiTwitterXFill} href="#" />
+                <SocialLink icon={RiTwitterXFill} href="https://x.com/AI_UR_Alfredo" />
                 <SocialLink icon={PiTelegramLogo} href="#" />
               </div>
               
@@ -123,9 +123,10 @@ const Navbar = () => {
 const SocialLink = ({ icon: Icon, href }) => (
   <a 
     href={href}
+    target='_blank'
     className="text-gray-400 hover:text-[#FF7A1A] transition-colors"
   >
-    <Icon className="w-4 h-4" />
+    <Icon className="size-5" />
   </a>
 );
 
