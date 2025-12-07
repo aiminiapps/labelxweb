@@ -1,0 +1,25 @@
+{
+    "name": "LabelX - Train AI, Earn Crypto",
+    "short_name": "LabelX",
+    "description": "Earn cryptocurrency by labeling data for AI",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#FF7A1A",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "/t-logo.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/t-logo.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  }
+  

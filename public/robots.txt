@@ -1,0 +1,7 @@
+# https://label-x.xyz/robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://label-x.xyz/sitemap.xml
