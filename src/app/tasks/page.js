@@ -43,7 +43,7 @@ const TasksPage = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative z-20 md:p-[3px] md:rounded-[55px] md:bg-gradient-to-b md:from-[#635f5c] md:via-[#4a4644] md:to-[#635f5c] md:shadow-[0_0_0_1px_rgba(0,0,0,0.5),0_20px_50px_-10px_rgba(0,0,0,0.5)]"
+        className="relative sm:w-fit w-full z-20 md:p-[3px] md:rounded-[55px] md:bg-gradient-to-b md:from-[#635f5c] md:via-[#4a4644] md:to-[#635f5c] md:shadow-[0_0_0_1px_rgba(0,0,0,0.5),0_20px_50px_-10px_rgba(0,0,0,0.5)]"
       >
         
         {/* --- PHYSICAL BUTTONS (Desktop Only) --- */}
