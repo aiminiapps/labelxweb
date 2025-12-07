@@ -106,7 +106,7 @@ const ReviewCard = ({ review }) => (
 
 const CTASection = () => {
   return (
-    <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center bg-black overflow-hidden border-t border-white/5">
+    <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center bg-black overflow-hidden">
        
        {/* Animated Warp Background */}
        <div className="absolute inset-0 opacity-30">
@@ -123,7 +123,7 @@ const CTASection = () => {
              initial={{ opacity: 0, scale: 0.9 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tighter"
+             className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tighter heading"
           >
              READY TO <br />
              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A1A] via-[#FDD536] to-[#FF7A1A] animate-gradient-x">
@@ -138,7 +138,7 @@ const CTASection = () => {
              transition={{ delay: 0.2 }}
              className="flex flex-col items-center gap-8"
           >
-             <p className="text-xl text-gray-400 max-w-xl mx-auto">
+             <p className="text-xl text-gray-400 max-w-xl mx-auto text-balance">
                 Start earning crypto in minutes. No resume, no interviews, just pure contribution.
              </p>
 
@@ -151,36 +151,6 @@ const CTASection = () => {
                 </button>
              </div>
           </motion.div>
-       </div>
-
-       {/* Footer Links */}
-       <div className="absolute bottom-0 w-full border-t border-white/5 bg-black/50 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded bg-gradient-to-br from-[#FF7A1A] to-[#FDD536] flex items-center justify-center text-black font-bold font-mono">
-                   L
-                </div>
-                <span className="text-white font-bold tracking-wide">LabelX</span>
-             </div>
-             
-             <div className="flex gap-6 text-sm text-gray-500">
-                <a href="#" className="hover:text-[#FF7A1A] transition-colors">Documentation</a>
-                <a href="#" className="hover:text-[#FF7A1A] transition-colors">Tokenomics</a>
-                <a href="#" className="hover:text-[#FF7A1A] transition-colors">Privacy</a>
-             </div>
-
-             <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
-                   <FaTwitter />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
-                   <FaDiscord />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all">
-                   <FaGithub />
-                </a>
-             </div>
-          </div>
        </div>
     </section>
   );
