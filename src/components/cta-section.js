@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaApple, FaGooglePlay } from 'react-icons/fa';
-import { SiEthereum } from 'react-icons/si';
+import { FaArrowRight } from 'react-icons/fa';
+import { PiTelegramLogo } from "react-icons/pi";
+import { SiBnbchain } from "react-icons/si";
 
 const CTASection = () => {
   return (
@@ -18,7 +19,7 @@ const CTASection = () => {
              className="text-5xl md:text-7xl heading font-bold text-white mb-6 tracking-tight "
           >
              Stop Scrolling, <br />
-             <span className="text-white/40">Start Earning.</span>
+             <span className="text-[#FF7A1A]">Start Earning.</span>
           </motion.h2>
 
           <motion.p 
@@ -51,7 +52,7 @@ const CTASection = () => {
                 View Documentation
              </button>
           </motion.div>
-          
+
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -62,8 +63,8 @@ const CTASection = () => {
               <div className="flex items-center gap-2">
                  <div className="flex -space-x-2">
                     {[1,2,3].map(i => (
-                        <div key={i} className="w-8 h-8 rounded-full bg-zinc-800 border border-black flex items-center justify-center text-[10px] text-gray-500">
-                           <SiEthereum />
+                        <div key={i} className="w-8 h-8 rounded-full bg-zinc-800 border border-black flex items-center justify-center text-[16px] text-gray-500">
+                           <SiBnbchain />
                         </div>
                     ))}
                  </div>
@@ -77,8 +78,7 @@ const CTASection = () => {
 
               <div className="flex items-center gap-4 text-gray-500 text-sm">
                  <span>Available on</span>
-                 <FaApple className="w-5 h-5 text-white hover:text-[#FF7A1A] transition-colors cursor-pointer" />
-                 <FaGooglePlay className="w-5 h-5 text-white hover:text-[#FF7A1A] transition-colors cursor-pointer" />
+                 <PiTelegramLogo className="w-5 h-5 text-white hover:text-[#FF7A1A] transition-colors cursor-pointer" />
                  <span className="text-xs border border-white/10 px-2 py-0.5 rounded text-gray-400">Web App</span>
               </div>
           </motion.div>
