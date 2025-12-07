@@ -2,101 +2,14 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { 
-  motion, 
-  useScroll, 
-  useTransform, 
-  useSpring,
-  useMotionTemplate, 
-  useMotionValue,
-  animate,
-  useInView,
-  AnimatePresence
-} from 'framer-motion';
-// Using standard react-icons/fa for maximum compatibility
+  motion
+} from 'motion/react';
 import { 
-  FaWallet, 
-  FaBrain, 
-  FaCoins, 
-  FaCheckDouble, 
-  FaUsers, 
   FaArrowRight, 
-  FaRocket, 
-  FaShieldAlt,
-  FaEye,
-  FaComments,
-  FaHeadphones,
-  FaLayerGroup,
-  FaBolt,
-  FaChartLine,
-  FaCode,
-  FaTerminal,
-  FaLink,
-  FaMousePointer,
-  FaCheckCircle,
-  FaClock,
-  FaGlobeAmericas,
-  FaQuestion,
   FaStar,
-  FaHistory,
-  FaQuoteLeft,
-  FaTwitter,
-  FaDiscord,
-  FaGithub
+  FaQuoteLeft
 } from 'react-icons/fa';
 
-const useLenis = () => {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js";
-    script.async = true;
-    script.onload = () => {
-      const lenis = new window.Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        smoothTouch: false,
-        touchMultiplier: 2,
-      });
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-};
-
-// --- 2. Micro-Interaction Icons ---
-
-const drawTransition = {
-  duration: 1.2,
-  ease: "easeInOut"
-};
-
-const AnimatedArrowRight = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-    <motion.path 
-      d="M5 12h14" 
-      initial={{ pathLength: 0 }} 
-      animate={{ pathLength: 1 }} 
-      transition={{ duration: 0.8, delay: 0.2 }} 
-    />
-    <motion.path 
-      d="M12 5l7 7-7 7" 
-      initial={{ pathLength: 0 }} 
-      animate={{ pathLength: 1 }} 
-      transition={{ duration: 0.8, delay: 0.4 }} 
-    />
-  </svg>
-);
 
 const testimonials = [
   {
@@ -188,8 +101,6 @@ const TestimonialSection = () => {
   );
 };
 
-// --- 10. NEW: CTA Section ---
-
 const CTASection = () => {
   return (
     <section className="relative w-full py-32 bg-black overflow-hidden flex flex-col items-center justify-center border-t border-white/5">
@@ -258,21 +169,4 @@ const CTASection = () => {
   );
 };
 
-// --- 11. Main App Component ---
-
-const App = () => {
-  useLenis();
-
-  return (
-    <main className="bg-black min-h-screen w-full selection:bg-[#FF7A1A]/30">
-      <Hero />
-      <AboutSection />
-      <AgentsSection />
-      <HowItWorksSection />
-      <TestimonialSection />
-      <CTASection />
-    </main>
-  );
-};
-
-export default App;
+export default TestimonialSection;
