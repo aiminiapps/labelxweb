@@ -2,13 +2,15 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTelegramPlane, FaTwitter, FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { RiTwitterXFill } from "react-icons/ri";
+import { PiTelegramLogo } from "react-icons/pi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
+    { name: 'Home', href: '/' },
     { name: 'Agent', href: '#' },
   ];
 
@@ -28,11 +30,11 @@ const Navbar = () => {
             
             {/* 1. Logo Section */}
             <div className="flex items-center gap-2 cursor-pointer group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF7A1A] to-[#FDD536] flex items-center justify-center">
-                 {/* Simple Abstract Logo Icon */}
-                 <div className="w-3 h-3 bg-black rounded-sm transform rotate-45 group-hover:rotate-90 transition-transform duration-500" />
-              </div>
-              <span className="text-white font-bold tracking-tight hidden sm:block">LabelX</span>
+            <img 
+                  src="/logo.png" 
+                  alt="LabelX Logo" 
+                  className="relative h-6"
+                />
             </div>
 
             {/* 2. Desktop Links (Centered) */}
@@ -55,8 +57,8 @@ const Navbar = () => {
               
               {/* Desktop Socials */}
               <div className="hidden md:flex items-center gap-3 pr-2 border-r border-white/10">
-                <SocialLink icon={FaTwitter} href="#" />
-                <SocialLink icon={FaTelegramPlane} href="#" />
+                <SocialLink icon={RiTwitterXFill} href="#" />
+                <SocialLink icon={PiTelegramLogo} href="#" />
               </div>
               
               {/* "Launch" Action (Optional but adds balance) */}
@@ -101,8 +103,8 @@ const Navbar = () => {
                   <div className="flex items-center justify-between px-2">
                     <span className="text-sm text-gray-500">Community</span>
                     <div className="flex gap-4">
-                      <SocialLink icon={FaTwitter} href="#" />
-                      <SocialLink icon={FaTelegramPlane} href="#" />
+                      <SocialLink icon={RiTwitterXFill} href="#" />
+                      <SocialLink icon={PiTelegramLogo} href="#" />
                     </div>
                   </div>
                 </div>
