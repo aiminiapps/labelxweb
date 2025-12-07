@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { PiTelegramLogo } from "react-icons/pi";
 import { RiTwitterXFill } from "react-icons/ri";
 import { SiBinance } from 'react-icons/si';
+import Link from 'next/link';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,6 +34,7 @@ const Footer = () => {
           <div className="flex flex-wrap justify-center items-center gap-4">
             
             {/* 1. AI Agent Button (New) */}
+            <Link href='/tasks'>
             <motion.button 
                whileHover={{ scale: 1.02 }}
                whileTap={{ scale: 0.98 }}
@@ -44,7 +46,7 @@ const Footer = () => {
                </div>
                <span className="text-sm font-medium text-gray-300 group-hover:text-white">Live Tasks</span>
             </motion.button>
-
+            </Link>
             <div className="w-px h-8 bg-white/10 hidden md:block" />
 
             {/* 2. BscScan Smart Contract */}

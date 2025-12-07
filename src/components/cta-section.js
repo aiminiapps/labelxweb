@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import { PiTelegramLogo } from "react-icons/pi";
 import { SiBnbchain } from "react-icons/si";
+import Link from 'next/link';
 
 const CTASection = () => {
   return (
@@ -42,10 +43,10 @@ const CTASection = () => {
              className="flex flex-col sm:flex-row items-center gap-4"
           >
              {/* Primary Action: Solid White (Maximum Contrast) */}
-             <button className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+             <Link href='/tasks' className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg flex items-center gap-3 transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
                 <span>Start Earning Now</span>
                 <FaArrowRight className="text-black -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-             </button>
+             </Link>
 
              {/* Secondary Action: Glass Outline */}
              <button className="px-8 py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 transition-colors backdrop-blur-sm">

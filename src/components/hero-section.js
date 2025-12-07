@@ -11,6 +11,7 @@ import {
   animate,
   useInView
 } from 'motion/react';
+import Link from 'next/link';
 
 const useLenis = () => {
   useEffect(() => {
@@ -367,6 +368,7 @@ const Hero = () => {
         >
           {/* Primary Button */}
           <MagneticButton className="w-full sm:w-auto">
+            <Link href='/tasks'>
             <button className="group relative w-full sm:w-auto px-9 py-4 bg-white text-black rounded-2xl font-bold text-base overflow-hidden shadow-[0_0_40px_-10px_rgba(255,122,26,0.4)]">
               {/* Internal shine using Primary color */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#FF7A1A]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -382,6 +384,7 @@ const Hero = () => {
                 className="absolute inset-0 w-2/3 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-12 opacity-50 pointer-events-none"
               />
             </button>
+            </Link>
           </MagneticButton>
 
           {/* Secondary Button */}

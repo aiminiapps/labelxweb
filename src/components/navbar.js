@@ -5,13 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { RiTwitterXFill } from "react-icons/ri";
 import { PiTelegramLogo } from "react-icons/pi";
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Agent', href: '#' },
+    { name: 'Agent', href: '/tasks' },
   ];
 
   return (
@@ -62,9 +63,9 @@ const Navbar = () => {
               </div>
               
               {/* "Launch" Action (Optional but adds balance) */}
-              <button className="hidden md:block px-4 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:scale-105 transition-transform">
+              <Link href='/tasks' className="hidden md:block px-4 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:scale-105 transition-transform">
                 App
-              </button>
+              </Link>
 
               {/* Mobile Hamburger */}
               <button 
