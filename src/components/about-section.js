@@ -283,7 +283,7 @@ const AboutSection = () => {
               getting LBLX tokens sent straight to your wallet.
             </motion.p>
           </div>
-          <Link href='https://x.com/AI_UR_Alfredo' target='_blank'>
+          <Link href='' target='_blank'>
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
