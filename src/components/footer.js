@@ -60,8 +60,8 @@ const Footer = () => {
 
             {/* 3. Social Icons */}
             <div className="flex gap-2">
-               <SocialButton href="https://x.com/AI_UR_Alfredo" icon={RiTwitterXFill} />
-               <SocialButton href="#" icon={PiTelegramLogo} />
+               <SocialButton href="" icon={RiTwitterXFill} />
+               <SocialButton href="https://t.me/LabelXAI_Bot" icon={PiTelegramLogo} />
             </div>
 
           </div>

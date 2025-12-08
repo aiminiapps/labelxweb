@@ -58,8 +58,8 @@ const Navbar = () => {
               
               {/* Desktop Socials */}
               <div className="hidden md:flex items-center gap-3 pr-2 border-r border-white/10">
-                <SocialLink icon={RiTwitterXFill} href="https://x.com/AI_UR_Alfredo" />
-                <SocialLink icon={PiTelegramLogo} href="#" />
+                <SocialLink icon={RiTwitterXFill} href="" />
+                <SocialLink icon={PiTelegramLogo} href="https://t.me/LabelXAI_Bot" />
               </div>
               
               {/* "Launch" Action (Optional but adds balance) */}
