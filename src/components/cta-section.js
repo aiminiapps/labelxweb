@@ -49,9 +49,11 @@ const CTASection = () => {
              </Link>
 
              {/* Secondary Action: Glass Outline */}
+             <a href='https://label-x.gitbook.io/label-x-docs/' target='_blank'>
              <button className="px-8 py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 transition-colors backdrop-blur-sm">
                 View Documentation
              </button>
+             </a>
           </motion.div>
 
           <motion.div 

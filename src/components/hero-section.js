@@ -388,12 +388,14 @@ const Hero = () => {
           </MagneticButton>
 
           {/* Secondary Button */}
+          <Link href='https://label-x.gitbook.io/label-x-docs/' target='_blank'>
           <button className="group w-full sm:w-auto px-9 py-4 bg-white/[0.02] border border-white/10 text-white rounded-2xl font-medium text-base backdrop-blur-xl transition-all relative overflow-hidden hover:bg-white/[0.05]">
             <div className="flex items-center justify-center gap-3">
               <AnimatedDocIcon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
               <span>How it Works</span>
             </div>
           </button>
+          </Link>
         </motion.div>
 
         {/* Stats Dashboard */}
