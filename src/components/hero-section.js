@@ -267,7 +267,6 @@ const MagneticButton = ({ children, className }) => {
   );
 };
 
-// --- 5. Main Hero Component ---
 
 const Hero = () => {
   // Initialize Lenis within the component
@@ -276,12 +275,10 @@ const Hero = () => {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
   
-  // Refined Parallax Physics
-  // Increased damping for "heavier" feel, adjusted transforms to keep elements in view properly
   const smoothScrollY = useSpring(scrollY, {
-    damping: 30,    // Smoother stop
+    damping: 30,    
     stiffness: 100, 
-    mass: 0.8       // Heavier feel
+    mass: 0.8      
   });
 
   const y1 = useTransform(smoothScrollY, [0, 500], [0, 50]); 
@@ -302,7 +299,6 @@ const Hero = () => {
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32 flex flex-col items-center text-center">
         
-        {/* Badge - Updated Colors */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -501,5 +497,4 @@ const FloatingParticles = () => (
   </div>
 );
 
-// Exporting as Hero as requested
 export default Hero;
