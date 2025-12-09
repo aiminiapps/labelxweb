@@ -40,8 +40,7 @@ const TasksPage = () => {
         transition={{ duration: 0.5 }}
         className="relative sm:w-fit w-full z-20 md:p-[3px] md:rounded-[55px] md:bg-gradient-to-b md:from-[#635f5c] md:via-[#4a4644] md:to-[#635f5c] md:shadow-[0_0_0_1px_rgba(0,0,0,0.5),0_20px_50px_-10px_rgba(0,0,0,0.5)]"
       >
-        
-        {/* --- PHYSICAL BUTTONS (Desktop Only) --- */}
+
         <div className="hidden md:block">
             {/* Left Side: Action & Volume */}
             <div className="absolute -left-[2px] top-[120px] w-[3px] h-7 bg-[#3a3735] rounded-l-md shadow-inner" /> {/* Action Button */}
