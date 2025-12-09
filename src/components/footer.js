@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { PiTelegramLogo } from "react-icons/pi";
 import { RiTwitterXFill } from "react-icons/ri";
 import { SiBinance } from 'react-icons/si';
@@ -15,8 +15,6 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          
-          {/* --- Left Side: Logo & Brand Identity --- */}
           <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
              <div className="flex flex-col">
              <img 
