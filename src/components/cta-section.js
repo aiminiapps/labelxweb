@@ -34,7 +34,6 @@ const CTASection = () => {
              No interviews, no schedules just immediate payouts in LBLX.
           </motion.p>
 
-          {/* --- 4. The "Magnetic" Premium Buttons --- */}
           <motion.div
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
@@ -50,7 +49,7 @@ const CTASection = () => {
 
              {/* Secondary Action: Glass Outline */}
              <a href='https://label-x.gitbook.io/label-x-docs/' target='_blank'>
-             <button className="px-8 py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 transition-colors backdrop-blur-sm">
+             <button className="px-8 py-4 rounded-full border border-white/10 text-white font-medium hover:bg-white/5 transitio n-colors backdrop-blur-sm">
                 View Documentation
              </button>
              </a>

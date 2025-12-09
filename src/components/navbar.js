@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { RiTwitterXFill } from "react-icons/ri";
 import { PiTelegramLogo } from "react-icons/pi";
@@ -29,7 +29,6 @@ const Navbar = () => {
           {/* Main "Pill" Container */}
           <div className="relative flex items-center justify-between px-6 py-3 rounded-full bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
             
-            {/* 1. Logo Section */}
             <div className="flex items-center gap-2 cursor-pointer group">
             <img 
                   src="/logo.png" 
