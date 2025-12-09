@@ -17,7 +17,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Floating Wrapper */}
       <motion.nav 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -46,13 +45,10 @@ const Navbar = () => {
                   className="relative text-sm font-medium text-gray-400 hover:text-white transition-colors py-2 group"
                 >
                   {link.name}
-                  {/* Hover Underline Animation */}
                   <span className="absolute bottom-0 left-1/2 w-0 h-px bg-[#FF7A1A] group-hover:w-full group-hover:left-0 transition-all duration-300" />
                 </a>
               ))}
             </div>
-
-            {/* 3. Socials & Mobile Toggle (Right) */}
             <div className="flex items-center gap-4">
               
               {/* Desktop Socials */}
@@ -60,13 +56,10 @@ const Navbar = () => {
                 <SocialLink icon={RiTwitterXFill} href="" />
                 <SocialLink icon={PiTelegramLogo} href="https://t.me/LabelXAI_Bot" />
               </div>
-              
-              {/* "Launch" Action (Optional but adds balance) */}
               <Link href='/tasks' className="hidden md:block px-4 py-1.5 rounded-full bg-white text-black text-xs font-bold hover:scale-105 transition-transform">
                 App
               </Link>
 
-              {/* Mobile Hamburger */}
               <button 
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -76,7 +69,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* 4. Mobile Menu Dropdown (Expands from Pill) */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -118,7 +110,6 @@ const Navbar = () => {
   );
 };
 
-// Helper for Social Icons
 const SocialLink = ({ icon: Icon, href }) => (
   <a 
     href={href}
