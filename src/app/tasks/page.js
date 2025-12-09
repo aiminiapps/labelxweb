@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { FaSpinner, FaWifi, FaBatteryFull, FaSignal } from 'react-icons/fa';
 
 const TasksPage = () => {
@@ -11,34 +11,29 @@ const TasksPage = () => {
   // Target URL
   const APP_URL = "https://label-x.vercel.app/";
 
-  // --- Real-Time Clock Logic ---
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
       setCurrentTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
     };
-    updateTime(); // Initial call
-    const timer = setInterval(updateTime, 1000 * 60); // Update every minute
+    updateTime(); 
+    const timer = setInterval(updateTime, 1000 * 60); 
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="relative w-full min-h-screen bg-[#050505] overflow-hidden flex items-center justify-center">
       
-      {/* --- BACKGROUND (UNCHANGED) --- */}
       <div className="hidden md:block absolute inset-0 pointer-events-none">
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF7A1A]/5 blur-[120px] rounded-full" />
          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
       </div>
 
-      {/* --- DESKTOP INFO TEXT --- */}
       <div className="hidden md:flex absolute top-12 left-0 right-0 flex-col items-center text-center z-10 pointer-events-none">
           <h1 className="text-3xl font-bold text-white tracking-tight mb-2">LabelX Workstation</h1>
           <p className="text-gray-500 text-sm">Previewing mobile interface • <span className="text-[#FF7A1A]">Live Connection</span></p>
       </div>
 
-      {/* --- THE PHONE CHASSIS WRAPPER --- */}
-      {/* This wrapper creates the Titanium Frame and Physical Buttons */}
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -63,10 +58,8 @@ const TasksPage = () => {
             <div className="absolute bottom-[80px] right-0 w-[2px] h-[3px] bg-[#2a2827]" />
         </div>
 
-        {/* --- INNER BEZEL (Black border between titanium and screen) --- */}
         <div className="relative w-full h-full md:w-[380px] md:h-[820px] bg-black md:rounded-[50px] md:border-[6px] md:border-black overflow-hidden shadow-inner">
             
-            {/* --- DESKTOP ONLY: Dynamic Island & Status Bar --- */}
             <div className="hidden md:flex absolute top-0 left-0 right-0 h-14 z-50 justify-between items-start px-8 pt-4 pointer-events-none select-none">
                 {/* Time (Live) */}
                 <div className="text-[14px] font-semibold text-white tracking-wide w-20">
@@ -89,7 +82,6 @@ const TasksPage = () => {
                 </div>
             </div>
 
-            {/* --- LOADING STATE --- */}
             {isLoading && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#050505] z-30">
                 <motion.div 
@@ -102,7 +94,6 @@ const TasksPage = () => {
               </div>
             )}
 
-            {/* --- THE IFRAME --- */}
             <iframe
               src={APP_URL}
               className="w-full h-[100dvh] md:h-full border-0 bg-[#050505]"
@@ -111,8 +102,6 @@ const TasksPage = () => {
               allow="accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone; payment; usb; vr; xr-spatial-tracking"
               sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
             />
-
-            {/* --- DESKTOP ONLY: Home Indicator --- */}
             <div className="hidden md:block absolute bottom-2 left-1/2 -translate-x-1/2 w-36 h-1.5 bg-white rounded-full z-50 pointer-events-none opacity-80 mix-blend-difference" />
             
         </div>
