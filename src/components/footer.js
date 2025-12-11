@@ -53,7 +53,7 @@ const Footer = () => {
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#111] border border-white/5 hover:border-[#F0B90B]/50 transition-colors group"
             >
               <SiBinance className="text-[#F0B90B] w-4 h-4" />
-              <span className="text-xs text-gray-400 font-mono group-hover:text-white">0x7a...8e21</span>
+              <span className="text-xs text-gray-400 font-mono group-hover:text-white">0x4f7...51BF</span>
             </a>
 
             {/* 3. Social Icons */}
