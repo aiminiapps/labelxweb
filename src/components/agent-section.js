@@ -362,8 +362,8 @@ const AgentsSection = () => {
             <div className="p-4 bg-black/60 border-t border-white/5 flex justify-between items-center backdrop-blur-sm">
                <div className="flex gap-4 text-xs text-gray-500 font-mono">
                   <span>Ln 42, Col 12</span>
-                  <span className='hidden sm:block'>UTF-8</span>
-                  <span className='hidden sm:block'>JavaScript</span>
+                  <span>UTF-8</span>
+                  <span>JavaScript</span>
                </div>
             </div>
           </motion.div>
