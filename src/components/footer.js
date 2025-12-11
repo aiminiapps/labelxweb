@@ -49,7 +49,7 @@ const Footer = () => {
 
             {/* 2. BscScan Smart Contract */}
             <a 
-              href="#" 
+              href="https://bscscan.com/token/0x4f7C0CC4AF9DE23EBb7b99A8e9a723dc5Bd051BF" target='_blank' 
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#111] border border-white/5 hover:border-[#F0B90B]/50 transition-colors group"
             >
               <SiBinance className="text-[#F0B90B] w-4 h-4" />
