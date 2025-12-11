@@ -365,9 +365,6 @@ const AgentsSection = () => {
                   <span className='hidden sm:block'>UTF-8</span>
                   <span className='hidden sm:block'>JavaScript</span>
                </div>
-               {/* <button className="px-4 py-1.5 rounded-lg bg-[#FF7A1A] text-black text-xs font-bold hover:bg-[#ff9040] transition-colors flex items-center gap-2">
-                  DEPLOY AGENT <FaArrowRight />
-               </button> */}
             </div>
           </motion.div>
 
