@@ -1,11 +1,11 @@
-import AboutSection from "@/oldlandingpage/components/about-section";
-import AgentsSection from "@/oldlandingpage/components/agent-section";
-import CTASection from "@/oldlandingpage/components/cta-section";
-import Footer from "@/oldlandingpage/components/footer";
-import Hero from "@/oldlandingpage/components/hero-section";
-import HowItWorksSection from "@/oldlandingpage/components/how-works";
-import Navbar from "@/oldlandingpage/components/navbar";
-import TestimonialSection from "@/oldlandingpage/components/testimonial-section";
+import AboutSection from "@/components/about-section";
+import AgentsSection from "@/components/agent-section";
+import CTASection from "@/components/cta-section";
+import Footer from "@/components/footer";
+import Hero from "@/components/hero-section";
+import HowItWorksSection from "@/components/how-works";
+import Navbar from "@/components/navbar";
+import TestimonialSection from "@/components/testimonial-section";
 
 export default function Home() {
   return (
