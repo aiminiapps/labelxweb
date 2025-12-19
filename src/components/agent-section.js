@@ -147,7 +147,7 @@ const AgentsSection = () => {
   return (
     <section className="relative w-full py-32 bg-black overflow-hidden flex flex-col items-center">
       {/* Industrial Noise Texture */}
-      <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       
       {/* Ambient Glows */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#FBBF24]/5 blur-[120px] rounded-full pointer-events-none" />
