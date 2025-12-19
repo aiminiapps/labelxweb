@@ -74,7 +74,7 @@ const StatusDot = ({ label = "Active" }) => (
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FBBF24] opacity-75"></span>
       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FBBF24]"></span>
     </span>
-    <span className="text-[10px] uppercase font-bold tracking-wider text-[#FBBF24]">{label}</span>
+    <span className="text-[10px] uppercase font-bold tracking-wider text-[#FBBF24]/90">{label}</span>
   </div>
 );
 
@@ -134,9 +134,9 @@ const AgentCard = ({ title, role, description, visual, colSpan = "col-span-1", d
       </div>
 
       {/* Corner Accent */}
-      <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+      {/* <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
         <FaBolt className="text-[#FBBF24] w-32 h-32 -translate-y-16 translate-x-16 rotate-12 blur-[40px]" />
-      </div>
+      </div> */}
     </motion.div>
   );
 };
@@ -161,10 +161,6 @@ const AgentsSection = () => {
           viewport={{ once: true }}
           className="max-w-4xl"
         >
-          <div className="inline-flex items-center gap-2 mb-4">
-             <span className="h-px w-8 bg-[#FBBF24]/50" />
-             <span className="text-[#FBBF24] text-xs font-mono uppercase tracking-[0.2em]">LabelX Intelligence Layer</span>
-          </div>
           <h2 className="text-4xl md:text-6xl font-medium text-white tracking-tighter leading-[1.1]">
             Meet Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] to-[#d97706]">AI Assistants</span>
           </h2>
