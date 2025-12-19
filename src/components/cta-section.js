@@ -6,7 +6,8 @@ import { Points, PointMaterial, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { FaRocket } from 'react-icons/fa6';
+import { RiTwitterXFill } from "react-icons/ri";
+
 
 // --- 1. 3D Particle Network Sphere ---
 
@@ -136,13 +137,13 @@ const CTASection = () => {
             className="pointer-events-auto"
         >
             <MagneticButton>
-                <Link href="/signup">
+                <Link href="https://x.com/intent/follow?screen_name=labelxofficial" target='_blank'>
                 <button className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-[#FBBF24] hover:bg-[#FCD34D] text-black rounded-full font-bold text-lg transition-all shadow-[0_0_40px_-5px_rgba(251,191,36,0.4)] hover:shadow-[0_0_60px_-5px_rgba(251,191,36,0.6)] overflow-hidden">
                     {/* Internal light sweep effect */}
                     <div className="absolute top-0 -left-[100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 group-hover:animate-shine" />
                     
-                    <FaRocket className="w-5 h-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
-                    <span>Join the Network</span>
+                    <RiTwitterXFill className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 scale-125" />
+                    <span>Follow Us</span>
                 </button>
                 </Link>
             </MagneticButton>
