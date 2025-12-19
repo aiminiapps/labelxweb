@@ -114,8 +114,8 @@ const AgentCard = ({ title, role, description, visual, colSpan = "col-span-1", d
              {visual.icon}
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white tracking-tight">{title}</h3>
-            <p className="text-xs font-mono text-[#FBBF24] uppercase tracking-wider">{role}</p>
+            <h3 className="text-lg font-bold text-white heading tracking-tight">{title}</h3>
+            <p className="text-xs font-mono text-[#FBBF24]/90 uppercase tracking-wider">{role}</p>
           </div>
         </div>
         <StatusDot label="Online" />
