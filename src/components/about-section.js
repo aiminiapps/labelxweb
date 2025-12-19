@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
-import { BiBrain, BiCoinStack } from 'react-icons/bi';
+import { BiCoinStack } from 'react-icons/bi';
 import { HiSparkles } from 'react-icons/hi2';
 import { RiTwitterXFill } from "react-icons/ri";
+import { FaFingerprint } from "react-icons/fa";
 
 // --- 1. Shared Animation Variants ---
 const containerVariants = {
@@ -48,19 +49,19 @@ const sliderData = [
     id: 1,
     title: "IMAGE ANNOTATION BASE",
     description: "Identify objects, segment pixels, and classify scenes to train computer vision models.",
-    image: "/logo.png"
+    image: "/slide/1.png"
   },
   {
     id: 2,
     title: "NATURAL LANGUAGE PROCESSING",
     description: "Verify sentiment, correct translations, and generate text for LLM training.",
-    image: "/logo.png"
+    image: "/slide/2.png"
   },
   {
     id: 3,
-    title: "DATA VERIFICATION UNIT",
-    description: "Ensure dataset quality by fact-checking and validating raw inputs.",
-    image: "/logo.png"
+    title: "Start Earning with Tasks",
+    description: "No experience needed. No complicated setup. Just connect, choose, and earn.",
+    image: "/slide/3.png"
   },
 ];
 
@@ -117,7 +118,7 @@ const TaskSlider = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="text-2xl font-bold text-white mb-2"
+                className="text-2xl font-bold uppercase text-white mb-2"
             >
                 {sliderData[activeIndex].title}
             </motion.h3>
@@ -198,7 +199,7 @@ const AboutSection = () => {
             <motion.div variants={itemVariants}>
                 <Card className="flex flex-col gap-4">
                     <div className="p-2 w-fit rounded-lg bg-[#FBBF24]/10 border border-[#FBBF24]/20">
-                        <BiBrain className="w-6 h-6 text-[#FBBF24]" />
+                        <FaFingerprint className="w-6 h-6 text-[#FBBF24]" />
                     </div>
                     <p className="text-sm text-neutral-400 leading-relaxed">
                         Powered by human intelligence for image labeling and data verification.
