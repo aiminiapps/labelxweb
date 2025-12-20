@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { FaArrowRight, FaWallet, FaPlay } from 'react-icons/fa6';
 import { RiRobot2Line, RiSecurePaymentFill } from 'react-icons/ri';
 import { HiSparkles } from 'react-icons/hi2';
+import { GiWhiteBook } from "react-icons/gi";
 
 // --- 1. Lenis Smooth Scroll Setup (Standard for Luxury Sites) ---
 const useLenis = () => {
@@ -173,11 +174,13 @@ const Hero = () => {
 
           {/* Secondary Button: Clean Glass */}
           <MagneticButton>
+          <Link href="https://label-x.gitbook.io/label-x-docs/" target="_blank">
             <button className="group flex items-center justify-center gap-3 px-8 py-4 bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.08] backdrop-blur-md text-white rounded-xl font-medium text-lg transition-all">
-              <FaWallet className="w-4 h-4 text-[#FBBF24]" />
-              <span>Connect Wallet</span>
+              <GiWhiteBook  className="w-4 h-4 text-[#FBBF24]" />
+              <span>How it Works</span>
               <FaArrowRight className="w-3 h-3 text-neutral-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
             </button>
+          </Link>
           </MagneticButton>
         </motion.div>
 
