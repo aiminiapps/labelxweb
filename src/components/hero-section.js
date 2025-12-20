@@ -71,11 +71,11 @@ const itemVariants = {
 const LuxuryBadge = () => (
   <motion.div 
     variants={itemVariants}
-    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#FBBF24]/20 bg-[#FBBF24]/5 backdrop-blur-md mb-8 group cursor-default transition-colors hover:border-[#FBBF24]/40"
+    className="inline-flex sm:mt-0 mt-6 items-center gap-2 px-4 py-2 rounded-full border border-[#FBBF24]/20 bg-[#FBBF24]/5 backdrop-blur-md mb-8 group cursor-default transition-colors hover:border-[#FBBF24]/40"
   >
     <HiSparkles className="text-[#FBBF24] w-4 h-4 animate-pulse" />
     <span className="text-xs font-semibold tracking-[0.2em] text-[#FBBF24] uppercase">
-      LabelX 2.0 Protocol
+      LabelX Protocol
     </span>
   </motion.div>
 );
@@ -142,15 +142,15 @@ const Hero = () => {
 
         {/* Headline */}
         <div className="relative mb-8">
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
+          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
             Unlock the Value of
           </motion.h1>
           
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
+          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
             <span className="text-[#333]">Human</span> Intelligence
           </motion.h1>
 
-          <motion.p variants={itemVariants} className="mt-6 text-xl text-neutral-400 font-light max-w-2xl mx-auto">
+          <motion.p variants={itemVariants} className="mt-6 text-base sm:text-xl text-balance text-neutral-400 font-light max-w-2xl mx-auto">
             Train AI models and earn real crypto. The first decentralized 
             <br className="hidden md:block"/>
             <MovingGradientText> work-to-earn </MovingGradientText> ecosystem on <MovingGradientText> LabelX</MovingGradientText>.
@@ -191,7 +191,7 @@ const Hero = () => {
         >
             <StatBox icon={RiRobot2Line} value="2.5M+" label="Tasks Completed" />
             <StatBox icon={RiSecurePaymentFill} value="$1.2M" label="Paid to Users" />
-            <StatBox icon={FaWallet} value="0.0s" label="Instant Payout" />
+            <StatBox icon={FaWallet} value="0.7s" label="Instant Payout" />
             
             {/* Partners / Ticker Placeholder */}
             <div className="flex items-center justify-center opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
