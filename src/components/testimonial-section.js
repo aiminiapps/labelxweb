@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { FaQuoteLeft, FaTwitter, FaDiscord } from 'react-icons/fa';
+import { FaQuoteLeft, FaDiscord } from 'react-icons/fa';
 import { HiCheckBadge } from 'react-icons/hi2';
+import { RiTwitterXFill } from "react-icons/ri";
 
 // --- 1. Data: The "Network Signals" ---
 const testimonials = [
@@ -57,8 +58,8 @@ const testimonials = [
 // --- 2. Sub-Components ---
 
 const UserBadge = ({ platform }) => (
-  <div className={`p-2 rounded-full ${platform === 'twitter' ? 'bg-[#1DA1F2]/10 text-[#1DA1F2]' : 'bg-[#5865F2]/10 text-[#5865F2]'} border border-white/5`}>
-    {platform === 'twitter' ? <FaTwitter className="w-3 h-3" /> : <FaDiscord className="w-3 h-3" />}
+  <div className={`p-2 rounded-full ${platform === 'twitter' ? 'bg-[#1DA1F2]/10 text-[#ffff]' : 'bg-[#5865F2]/10 text-[#5865F2]'} border border-white/5`}>
+    {platform === 'twitter' ? <RiTwitterXFill className="w-3 h-3" /> : <FaDiscord className="w-3 h-3" />}
   </div>
 );
 
