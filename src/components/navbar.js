@@ -14,8 +14,8 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Agents', href: '/tasks' }, // Renamed Agent to Agents for context
-    { name: 'Docs', href: 'https://label-x.gitbook.io/label-x-docs/' }, // Added logic for external link if needed
+    { name: 'Agents', href: '/tasks' }, 
+    { name: 'Docs', href: 'https://label-x.gitbook.io/label-x-docs/' },
   ];
 
   return (
@@ -48,7 +48,7 @@ const Navbar = () => {
                   key={link.name} 
                   href={link.href} 
                   target={link.name === 'Docs' ? '_blank' : '_self'}
-                  className="relative px-5 py-2 text-xs font-medium text-neutral-400 hover:text-white transition-colors group"
+                  className="relative px-5 py-2 text- font-medium text-neutral-400 hover:text-white transition-colors group"
                 >
                   {link.name}
                   {/* Glowing Dot Indicator */}
@@ -62,7 +62,7 @@ const Navbar = () => {
               
               {/* Desktop Socials Divider */}
               <div className="hidden md:flex items-center gap-2 pr-4 border-r border-white/10">
-                <SocialLink icon={RiTwitterXFill} href="https://x.com/labelx_ai" />
+                <SocialLink icon={RiTwitterXFill} href="https://x.com/labelxofficial" />
                 <SocialLink icon={PiTelegramLogo} href="https://t.me/LabelXAI_Bot" />
               </div>
 
@@ -119,7 +119,7 @@ const Navbar = () => {
                   {/* Mobile Socials & CTA */}
                   <div className="flex items-center justify-between px-1">
                     <div className="flex gap-2">
-                      <SocialLink icon={RiTwitterXFill} href="https://x.com/labelx_ai" />
+                      <SocialLink icon={RiTwitterXFill} href="https://x.com/labelxofficial" />
                       <SocialLink icon={PiTelegramLogo} href="https://t.me/LabelXAI_Bot" />
                     </div>
                     <Link href="/tasks" onClick={() => setIsOpen(false)}>
