@@ -7,6 +7,7 @@ import { PiTelegramLogo } from "react-icons/pi";
 import { RiTwitterXFill, RiGithubFill } from "react-icons/ri";
 import { SiBinance } from 'react-icons/si';
 import { HiArrowUpRight } from 'react-icons/hi2';
+import Image from 'next/image';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -29,11 +30,12 @@ const Footer = () => {
             
             {/* Left: Brand Identity */}
             <div className="flex flex-col gap-4">
-               {/* Replace with your actual Logo Image if needed, using text for now to match style */}
-               <div className="flex items-center gap-2">
-                   <div className="w-8 h-8 bg-[#FBBF24] rounded-lg flex items-center justify-center text-black font-bold text-xl">L</div>
-                   <span className="text-2xl font-bold text-white tracking-tight">LabelX</span>
-               </div>
+              <Image
+                src="/logo.png"
+                width={120}
+                height={60}
+                alt="Picture of the author"
+              />
                <p className="text-neutral-500 text-sm max-w-xs">
                    The decentralized consensus layer for AI data verification and rewards.
                </p>
@@ -77,28 +79,16 @@ const Footer = () => {
           
           {/* Copyright */}
           <div className="flex items-center gap-2">
-             <span>&copy; {currentYear} LabelX Foundation.</span>
+             <span>&copy; {currentYear} LabelX</span>
              <span className="hidden md:inline text-neutral-700">|</span>
              <span className="hidden md:inline">All Rights Reserved.</span>
           </div>
 
           {/* Social Icons */}
           <div className="flex items-center gap-2">
-             <SocialButton href="https://twitter.com" icon={RiTwitterXFill} label="Twitter" />
+             <SocialButton href="https://x.com/intent/follow?screen_name=labelxofficial" icon={RiTwitterXFill} label="Twitter" />
              <SocialButton href="https://t.me/LabelXAI_Bot" icon={PiTelegramLogo} label="Telegram" />
-             <SocialButton href="https://github.com" icon={RiGithubFill} label="GitHub" />
           </div>
-
-          {/* Extra Links (From Reference) */}
-          <div className="flex items-center gap-6">
-             <Link href="/terms" className="hover:text-white transition-colors flex items-center gap-1">
-                Terms <HiArrowUpRight className="w-3 h-3" />
-             </Link>
-             <a href="mailto:hello@labelx.ai" className="hover:text-white transition-colors flex items-center gap-1">
-                hello@labelx.ai
-             </a>
-          </div>
-
         </div>
       </div>
     </footer>
