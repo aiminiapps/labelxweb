@@ -179,23 +179,14 @@ const HowItWorksSection = () => {
   };
 
   return (
-    <section className="relative w-full py-32 bg-black text-white overflow-hidden">
+    <section className="relative w-full py-20 bg-[#000000] overflow-hidden">
       {/* Noise Texture */}
-      <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       
       <div className="max-w-[1600px] mx-auto px-6 relative z-10">
         
         {/* Header */}
         <div className="text-center mb-24">
-           <motion.div
-             initial="hidden" whileInView="visible" viewport={{ once: true }}
-             variants={variants}
-             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FBBF24]/5 border border-[#FBBF24]/10 mb-6"
-           >
-              <HiSparkles className="text-[#FBBF24]" />
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FBBF24]">Onboarding Protocol</span>
-           </motion.div>
-
            <motion.h2 
             initial="hidden" whileInView="visible" viewport={{ once: true }}
             variants={variants}
@@ -244,37 +235,6 @@ const HowItWorksSection = () => {
            />
 
         </div>
-
-        {/* FAQ / Info Grid */}
-        <div className="border-t border-white/[0.05] pt-16">
-           <div className="flex items-center gap-3 mb-10">
-              <div className="h-px w-8 bg-[#FBBF24]" />
-              <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-[#FBBF24]">
-                 Protocol Details
-              </h3>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {faqs.map((faq, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-8 rounded-[24px] bg-[#0A0A0A] border border-white/[0.08] hover:bg-[#111] hover:border-[#FBBF24]/20 transition-all duration-300 group"
-                >
-                   <div className="flex items-start justify-between mb-4">
-                       <FaQuestion className="text-neutral-700 group-hover:text-[#FBBF24] transition-colors" />
-                       <span className="text-[10px] text-neutral-600 font-mono">FAQ_{i+1}</span>
-                   </div>
-                   <h4 className="font-bold text-white mb-3 text-sm">{faq.q}</h4>
-                   <p className="text-neutral-400 text-sm leading-relaxed font-light">{faq.a}</p>
-                </motion.div>
-              ))}
-           </div>
-        </div>
-
       </div>
     </section>
   );
@@ -306,7 +266,7 @@ const StepCard = ({ stepNum, title, desc, visual, delay }) => (
                 </span>
                 <div className="h-px flex-1 bg-white/[0.1]" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FBBF24] transition-colors">{title}</h3>
+            <h3 className="text-2xl font-bold heading text-white mb-3 group-hover:text-[#FBBF24] transition-colors">{title}</h3>
             <p className="text-neutral-400 text-sm leading-relaxed font-light">
                 {desc}
             </p>
