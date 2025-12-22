@@ -9,8 +9,6 @@ import Link from 'next/link';
 import { RiTwitterXFill } from "react-icons/ri";
 
 
-// --- 1. 3D Particle Network Sphere ---
-
 function ParticleGlobe(props) {
   const ref = useRef();
   // Generate 5000 random points on a sphere surface
@@ -61,8 +59,6 @@ function ParticleGlobe(props) {
   );
 }
 
-// --- 2. UI Content Components ---
-
 const MagneticButton = ({ children }) => (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -73,7 +69,6 @@ const MagneticButton = ({ children }) => (
     </motion.div>
 );
 
-// --- 3. Main CTA Section ---
 
 const CTASection = () => {
   const [hovered, setHovered] = useState(false);
@@ -87,7 +82,6 @@ const CTASection = () => {
        {/* Background Ambience */}
        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
        
-      {/* --- Layer 1: The 3D Canvas Background --- */}
       <div className={`absolute inset-0 z-0 transition-transform duration-1000 ease-out ${hovered ? 'scale-105' : 'scale-100'}`}>
         {/* A subtle radial gradient behind the sphere to make it pop */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.08)_0%,#000000_60%)] z-0 pointer-events-none" />
