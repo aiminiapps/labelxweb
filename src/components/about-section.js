@@ -9,7 +9,6 @@ import { HiSparkles } from 'react-icons/hi2';
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaFingerprint } from "react-icons/fa";
 
-// --- 1. Shared Animation Variants ---
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -43,7 +42,6 @@ const YellowAccent = ({ children }) => (
   </span>
 );
 
-// --- 3. Slider Data & Component ---
 const sliderData = [
   {
     id: 1,
@@ -150,9 +148,6 @@ const TaskSlider = () => {
   );
 };
 
-
-// --- 4. Main Component ---
-
 const AboutSection = () => {
   return (
     <section className="relative w-full py-32 bg-[#000000] overflow-hidden">
@@ -166,8 +161,6 @@ const AboutSection = () => {
         // CHANGE: Increased max-width here for a wider layout
         className="relative z-10 max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8"
       >
-        
-        {/* --- Column 1 --- */}
         <div className="lg:col-span-5 flex flex-col justify-between relative min-h-[40vh] lg:min-h-0">
           <motion.div variants={itemVariants}>
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight text-white leading-[1.1] mb-6">
@@ -207,8 +200,6 @@ const AboutSection = () => {
                 </Card>
             </motion.div>
         </div>
-
-        {/* --- Column 3 (Slider) --- */}
         <div className="lg:col-span-4 flex flex-col gap-6 lg:gap-8">
             <motion.div variants={itemVariants}>
                  <p className="text-lg lg:text-xl text-white leading-relaxed font-light">

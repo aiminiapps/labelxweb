@@ -7,7 +7,6 @@ import { FaSpinner } from 'react-icons/fa';
 const TasksPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Target URL
   const APP_URL = "https://label-x.vercel.app/?tab=task2";
 
   return (
