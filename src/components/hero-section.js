@@ -39,9 +39,6 @@ const useLenis = () => {
   }, []);
 };
 
-// --- 2. Animations & Variants ---
-
-// Standardized "Up & Fade" stagger for professional reveal
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -66,7 +63,6 @@ const itemVariants = {
   },
 };
 
-// --- 3. UI Components ---
 
 const LuxuryBadge = () => (
   <motion.div 
@@ -101,7 +97,6 @@ const MagneticButton = ({ children }) => {
   );
 };
 
-// --- 4. Main Hero Component ---
 
 const Hero = () => {
   useLenis();
