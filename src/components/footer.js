@@ -15,17 +15,14 @@ const Footer = () => {
   return (
     <footer className="relative w-full bg-black overflow-hidden pt-32 pb-8">
       
-      {/* --- 1. The Massive Background Text (Reference Style) --- */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <h1 className="text-[22vw] font-bold text-[#0A0A0A] tracking-tighter leading-none whitespace-nowrap">
           LABELX
         </h1>
       </div>
 
-      {/* --- 2. Main Content Layer --- */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 h-full flex flex-col justify-end">
         
-        {/* Top Row: Functional Actions (Your provided data) */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12 border-b border-white/[0.05] pb-12">
             
             {/* Left: Brand Identity */}
@@ -74,7 +71,6 @@ const Footer = () => {
             </div>
         </div>
 
-        {/* --- Bottom Row: Meta & Socials (Reference Layout) --- */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono uppercase tracking-wider text-neutral-500">
           
           {/* Copyright */}
