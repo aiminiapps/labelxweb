@@ -13,7 +13,6 @@ import {
 import { SiOpencv } from 'react-icons/si';
 import { BiRadar } from 'react-icons/bi';
 
-// --- 1. Animation Configurations ---
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -132,11 +131,6 @@ const AgentCard = ({ title, role, description, visual, colSpan = "col-span-1", d
           {description}
         </p>
       </div>
-
-      {/* Corner Accent */}
-      {/* <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
-        <FaBolt className="text-[#FBBF24] w-32 h-32 -translate-y-16 translate-x-16 rotate-12 blur-[40px]" />
-      </div> */}
     </motion.div>
   );
 };
