@@ -1,57 +1,36 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, useAnimation, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import Image from 'next/image';
 
-// --- 1. The Abstract Brand Mark (SVG Path Animation) ---
-const BrandLogo = ({ progress }) => {
-  // A stylized abstract "L-X" geometric shape
-  const pathVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: { 
-      pathLength: 1, 
-      opacity: 1,
-      transition: { duration: 1.5, ease: "easeInOut" }
-    }
-  };
-
+// --- 1. The Brand Mark (Image Version) ---
+const BrandLogo = () => {
   return (
-    <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+    <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
       {/* Glow behind logo */}
-      <div className="absolute inset-0 bg-[#FBBF24] blur-[80px] opacity-20" />
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ duration: 2, delay: 0.5 }}
+        className="absolute inset-0 bg-[#FBBF24] blur-[60px] rounded-full" 
+      />
       
-      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]">
-        {/* Outer Ring Segment */}
-        <motion.path
-          d="M 50 10 A 40 40 0 0 1 90 50"
-          fill="none"
-          stroke="#FBBF24"
-          strokeWidth="2"
-          strokeLinecap="round"
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
+      {/* The Logo Image */}
+      <motion.div
+        className="relative w-full h-full"
+        initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }} // "Cinematic" Ease
+      >
+        <Image 
+          src="/t-logo.png" 
+          alt="LabelX Logo" 
+          fill 
+          className="object-contain drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+          priority
         />
-        {/* The "L" Shape */}
-        <motion.path
-          d="M 35 30 V 70 H 75"
-          fill="none"
-          stroke="#FBBF24"
-          strokeWidth="6"
-          strokeLinecap="square"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: progress / 100, opacity: 1 }} // Ties drawing to loading progress
-          transition={{ duration: 0.1, ease: "linear" }}
-        />
-        {/* Decorative Dot */}
-        <motion.circle 
-          cx="75" cy="25" r="3" 
-          fill="#FBBF24"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        />
-      </svg>
+      </motion.div>
     </div>
   );
 };
@@ -106,7 +85,7 @@ const Loader = ({ onComplete }) => {
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000000] overflow-hidden cursor-wait"
       exit={{ 
         y: -1000, // Cinematic "Curtain Up" exit
-        opacity: 1, // Keep opacity to mask content underneath until moved
+        opacity: 1, 
         transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] } 
       }}
     >
@@ -130,9 +109,9 @@ const Loader = ({ onComplete }) => {
       {/* --- Main Centerpiece --- */}
       <div className="relative z-10 flex flex-col items-center">
         
-        {/* 1. The Brand Mark */}
+        {/* 1. The Brand Mark (Image) */}
         <div className="mb-12">
-          <BrandLogo progress={progress} />
+          <BrandLogo />
         </div>
 
         {/* 2. The Big Number (Typography as Art) */}
