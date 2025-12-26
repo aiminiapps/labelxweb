@@ -127,7 +127,7 @@ const Loader = ({ onComplete }) => {
 
         {/* The Big Number (Driven by MotionValue) */}
         <div className="relative flex items-end overflow-hidden h-24 md:h-32">
-          <motion.span className="text-8xl md:text-9xl font-medium tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 tabular-nums">
+          <motion.span className="text-8xl md:text-9xl font-medium tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 tabular-nums pr-3">
             {rounded}
           </motion.span>
           <span className="text-2xl text-[#FBBF24] font-mono mb-6 ml-1">%</span>
