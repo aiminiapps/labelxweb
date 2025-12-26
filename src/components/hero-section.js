@@ -63,19 +63,6 @@ const itemVariants = {
   },
 };
 
-
-const LuxuryBadge = () => (
-  <motion.div 
-    variants={itemVariants}
-    className="inline-flex sm:mt-0 mt-6 items-center gap-2 px-4 py-2 rounded-full border border-[#FBBF24]/20 bg-[#FBBF24]/5 backdrop-blur-md mb-8 group cursor-default transition-colors hover:border-[#FBBF24]/40"
-  >
-    <HiSparkles className="text-[#FBBF24] w-4 h-4 animate-pulse" />
-    <span className="text-xs font-semibold tracking-[0.2em] text-[#FBBF24] uppercase">
-      LabelX Protocol
-    </span>
-  </motion.div>
-);
-
 const MovingGradientText = ({ children }) => {
   return (
     <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] via-[#FCD34D] to-[#D97706] bg-[length:200%_auto] animate-gradient-slow font-semibold">
@@ -132,12 +119,10 @@ const Hero = () => {
         className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center text-center pt-20"
       >
         
-        {/* Badge */}
-        <LuxuryBadge />
 
         {/* Headline */}
         <div className="relative mb-8">
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
+          <motion.h1 variants={itemVariants} className="text-4xl mt-10 md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.1]">
             Unlock the Value of
           </motion.h1>
           
