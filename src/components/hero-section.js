@@ -131,9 +131,9 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p variants={itemVariants} className="mt-6 text-base sm:text-xl text-balance text-neutral-400 font-light max-w-2xl mx-auto">
-            Train AI models and earn real crypto. The first decentralized 
+            LabelX connects human 
             <br className="hidden md:block"/>
-            <MovingGradientText> work-to-earn </MovingGradientText> ecosystem on <MovingGradientText> LabelX</MovingGradientText>.
+            <MovingGradientText> contribution </MovingGradientText> directly to <MovingGradientText> AI performance</MovingGradientText>.
           </motion.p>
         </div>
 
@@ -175,7 +175,7 @@ const Hero = () => {
             
             {/* Partners / Ticker Placeholder */}
             <div className="flex items-center justify-center opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
-               <span className="text-sm font-mono text-neutral-500 tracking-widest uppercase">Trusted by RiceAI</span>
+               <span className="text-sm font-mono text-neutral-500 tracking-widest uppercase">Trusted by LABEL X</span>
             </div>
         </motion.div>
 
