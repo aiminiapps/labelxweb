@@ -205,7 +205,7 @@ const Loader = ({ onComplete }) => {
         {/* Loading Indicator */}
         <div className="flex flex-col items-center gap-4">
           {/* Status Text (Scramble Effect) */}
-          <div className="h-6 text-[#F0B90C] text-xs md:text-sm font-bold">
+          <div className="h-6 text-[#F0B90C] text-xs md:text-sm font-semibold">
             <ScrambleText text={statusText} />
           </div>
 
