@@ -76,12 +76,12 @@ const LogoAnimator = ({ mouseX, mouseY }) => {
       className="relative w-48 h-48 md:w-64 md:h-64 perspective-1000"
     >
       {/* Ambient Glow Behind */}
-      <motion.div 
+      {/* <motion.div 
         className="absolute inset-0 rounded-full blur-[80px]"
         style={{ backgroundColor: GOLD }}
         animate={{ opacity: [0.2, 0.4, 0.2], scale: [0.8, 1.1, 0.8] }}
         transition={{ duration: 4, repeat: Infinity }}
-      />
+      /> */}
 
       <svg 
         viewBox="0 0 1300 1300" 
