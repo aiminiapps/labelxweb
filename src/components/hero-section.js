@@ -194,7 +194,7 @@ const Hero = () => {
         {/* Stats / Social Proof */}
         <motion.div 
           variants={itemVariants}
-          className="mt-24 w-full grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-white/[0.05] pt-12 backdrop-blur-sm"
+          className="mt-24 w-full grid grid-cols-2 md:grid-cols-4 rounded-2xl py-5 gap-8 md:gap-12 border-t border-white/[0.05] pt-12 backdrop-blur-sm"
         >
             <StatBox icon={RiRobot2Line} value="2.5M+" label="Tasks Completed" />
             <StatBox icon={RiSecurePaymentFill} value="$1.2M" label="Paid to Users" />
