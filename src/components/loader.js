@@ -1,31 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, useMotionValue, useTransform, animate, AnimatePresence } from 'motion/react';
-
-// --- 1. Utility: Cybernetic Scrambler ---
-const ScrambleText = ({ text }) => {
-  const [display, setDisplay] = useState(text);
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_//[]";
-
-  useEffect(() => {
-    let iteration = 0;
-    const interval = setInterval(() => {
-      setDisplay(
-        text.split("").map((letter, index) => {
-          if (index < iteration) return text[index];
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join("")
-      );
-      if (iteration >= text.length) clearInterval(interval);
-      iteration += 1 / 3; 
-    }, 30);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return <span className="font-mono tracking-[0.25em]">{display}</span>;
-};
-
+import { motion, useMotionValue, useTransform } from 'motion/react';
 // --- 2. The Constructivist Logo Animation ---
 const LogoConstruct = ({ mouseX, mouseY }) => {
   // Parallax Tilt
@@ -189,34 +165,6 @@ const Loader = ({ onComplete }) => {
         {/* The Interactive Logo */}
         <div className="mb-12">
             <LogoConstruct mouseX={mouseX} mouseY={mouseY} />
-        </div>
-
-        {/* Minimalist Data Readout */}
-        <div className="flex flex-col items-center gap-6 w-64 md:w-80">
-          
-          {/* Progress Bar Container */}
-          <div className="w-full h-[2px] bg-[#1a1a1a] rounded-full overflow-hidden relative">
-            {/* The Bar */}
-            <motion.div 
-              className="absolute inset-y-0 left-0 bg-[#FBBF24]"
-              style={{ width: `${progress}%` }}
-              transition={{ ease: "linear" }}
-            />
-            {/* The Head Glow */}
-            <motion.div 
-               className="absolute top-1/2 -translate-y-1/2 w-20 h-4 bg-[#FBBF24] blur-[10px]"
-               style={{ left: `${progress - 20}%` }}
-            />
-          </div>
-
-          {/* Text Info */}
-          <div className="w-full flex justify-between items-center text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
-            <span className="text-[#FBBF24]">
-                <ScrambleText text={statusText} />
-            </span>
-            <span>{Math.floor(progress)}%</span>
-          </div>
-
         </div>
 
       </div>
