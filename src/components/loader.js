@@ -168,17 +168,6 @@ const Loader = ({ onComplete }) => {
         </div>
 
       </div>
-
-      {/* Footer Version Info */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 text-[9px] font-mono text-white tracking-[0.5em]"
-      >
-        V.1.0.2 // SECURE
-      </motion.div>
-
     </motion.div>
   );
 };
