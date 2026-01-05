@@ -236,7 +236,7 @@ const Loader = ({ onComplete }) => {
         transition={{ delay: 1 }}
         className="absolute bottom-8 text-[9px] font-mono text-white tracking-[0.5em]"
       >
-        V.2.0.4 // SECURE
+        V.1.0.2 // SECURE
       </motion.div>
 
     </motion.div>
