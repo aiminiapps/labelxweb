@@ -111,14 +111,6 @@ const LogoConstruct = ({ mouseX, mouseY }) => {
           ))}
         </motion.g>
       </svg>
-      
-      {/* Cinematic Glare Effect overlaid on the SVG */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none"
-        style={{ mixBlendMode: 'overlay' }}
-        animate={{ x: ['-100%', '200%'] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 2 }}
-      />
     </motion.div>
   );
 };
