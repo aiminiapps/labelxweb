@@ -55,9 +55,10 @@ uniform vec2 parallaxOffset;
 uniform vec3 lineGradient[8];
 uniform int lineGradientCount;
 
+// --- LABELX THEME COLORS ---
 const vec3 BLACK = vec3(0.0);
-const vec3 PINK  = vec3(233.0, 71.0, 245.0) / 255.0;
-const vec3 BLUE  = vec3(47.0,  75.0, 162.0) / 255.0;
+const vec3 GOLD  = vec3(251.0, 191.0, 36.0) / 255.0; // #FBBF24 (LabelX Primary)
+const vec3 AMBER = vec3(217.0, 119.0, 6.0) / 255.0;  // #D97706 (Deep Yellow)
 
 mat2 rotate(float r) {
   return mat2(cos(r), sin(r), -sin(r), cos(r));
@@ -69,9 +70,10 @@ vec3 background_color(vec2 uv) {
   float y = sin(uv.x - 0.2) * 0.3 - 0.1;
   float m = uv.y - y;
 
-  col += mix(BLUE, BLACK, smoothstep(0.0, 1.0, abs(m)));
-  col += mix(PINK, BLACK, smoothstep(0.0, 1.0, abs(m - 0.8)));
-  return col * 0.5;
+  // Use LabelX colors for the background mix
+  col += mix(AMBER, BLACK, smoothstep(0.0, 1.0, abs(m)));
+  col += mix(GOLD, BLACK, smoothstep(0.0, 1.0, abs(m - 0.8)));
+  return col * 0.3; // Lower opacity for background subtlety
 }
 
 vec3 getLineColor(float t, vec3 baseColor) {
@@ -80,7 +82,7 @@ vec3 getLineColor(float t, vec3 baseColor) {
   }
 
   vec3 gradientColor;
-  
+   
   if (lineGradientCount == 1) {
     gradientColor = lineGradient[0];
   } else {
@@ -95,11 +97,11 @@ vec3 getLineColor(float t, vec3 baseColor) {
     
     gradientColor = mix(c1, c2, f);
   }
-  
-  return gradientColor * 0.5;
+   
+  return gradientColor * 0.8; // Slightly brighter lines
 }
 
-  float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
+ float wave(vec2 uv, float offset, vec2 screenUv, vec2 mouseUv, bool shouldBend) {
   float time = iTime * animationSpeed;
 
   float x_offset   = offset;
@@ -115,19 +117,21 @@ vec3 getLineColor(float t, vec3 baseColor) {
   }
 
   float m = uv.y - y;
-  return 0.0175 / max(abs(m) + 0.01, 1e-3) + 0.01;
+  // Sharper lines for tech look
+  return 0.012 / max(abs(m) + 0.005, 1e-3) + 0.005;
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   vec2 baseUv = (2.0 * fragCoord - iResolution.xy) / iResolution.y;
   baseUv.y *= -1.0;
-  
+   
   if (parallax) {
     baseUv += parallaxOffset;
   }
 
   vec3 col = vec3(0.0);
 
+  // If no gradients provided, use the procedural background
   vec3 b = lineGradientCount > 0 ? vec3(0.0) : background_color(baseUv);
 
   vec2 mouseUv = vec2(0.0);
@@ -135,7 +139,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     mouseUv = (2.0 * iMouse - iResolution.xy) / iResolution.y;
     mouseUv.y *= -1.0;
   }
-  
+   
   if (enableBottom) {
     for (int i = 0; i < bottomLineCount; ++i) {
       float fi = float(i);
@@ -228,7 +232,8 @@ function hexToVec3(hex) {
 }
 
 export default function FloatingLines({
-  linesGradient,
+  // DEFAULT THEME: Gold to Amber Gradient
+  linesGradient = ['#FBBF24', '#F59E0B', '#D97706'], 
   enabledWaves = ['top', 'middle', 'bottom'],
   lineCount = [6],
   lineDistance = [5],
@@ -432,16 +437,11 @@ export default function FloatingLines({
 
     return () => {
       cancelAnimationFrame(raf);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (ro && containerRef.current) {
-        ro.disconnect();
-      }
-
+      if (ro && containerRef.current) ro.disconnect();
       if (interactive) {
         renderer.domElement.removeEventListener('pointermove', handlePointerMove);
         renderer.domElement.removeEventListener('pointerleave', handlePointerLeave);
       }
-
       geometry.dispose();
       material.dispose();
       renderer.dispose();
@@ -449,7 +449,6 @@ export default function FloatingLines({
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     linesGradient,
     enabledWaves,
