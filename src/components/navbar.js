@@ -29,7 +29,7 @@ const Navbar = () => {
         {/* Main "Control Center" Pill */}
         <div className="w-full max-w-4xl relative">
           
-          <div className="relative flex items-center justify-between px-6 py-3 rounded-full bg-[#0A0A0A]/90 backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.8)] z-50">
+          <div className="relative flex items-center justify-between px-6 py-3 rounded-full bg-[#0A0A0A]/20 backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.8)] z-50">
             
             {/* 1. Logo Area */}
             <Link href="/" className="flex items-center gap-2 cursor-pointer group">
